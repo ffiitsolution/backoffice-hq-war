@@ -10,10 +10,10 @@
     </parent>
     <packaging>jar</packaging>
     <groupId>com.ffi</groupId>
-    <artifactId>backofficeho</artifactId>
+    <artifactId>backofficehq</artifactId>
     <version>0.0.1</version>
-    <name>backofficeho</name>
-    <description>Backoffice HO FFI project for Spring Boot API</description>
+    <name>backofficehq</name>
+    <description>Backoffice HQ FFI project for Spring Boot API</description>
     <properties>
         <java.version>17</java.version>
     </properties>

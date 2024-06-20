@@ -33,17 +33,16 @@ public class AuthController {
         TokenResponse tokenResponse = authService.login(request);
 
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("kodeUser", request.getKodeUser());
-        params.put("kodePassword", request.getKodePassword());
+        params.put("staffCode", request.getStaffCode());
+        params.put("password", request.getPassword());
 
-        List<Map<String, Object>> locations = viewService.getLocation(params);
+//        List<Map<String, Object>> locations = viewService.getLocation(params);
 
         Map<String, Object> user = viewService.getLoginDetail(params);
 
         Map<String, Object> res = new HashMap<>();
-        res.put("token", tokenResponse.getToken());
-        res.put("expiredAt", tokenResponse.getExpiredAt());
-        res.put("locations", locations);
+        res.put("token", tokenResponse.getPhoto());
+//        res.put("expiredAt", tokenResponse.getExpiredAt());
         res.put("user", user);
 
         return WebResponse.<Map<String, Object>>builder()

@@ -12,32 +12,29 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "WMS_USER")
+@Table(name = "M_STAFF")
 public class User {
 
     @Id
-    @Column(name = "KODE_USER")
-    private String kodeUser;
+    @Column(name = "STAFF_CODE")
+    private String staffCode;
 
-    @Column(name = "KODE_PASSWORD")
-    private String kodePassword;
+    @Column(name = "PASSWORD")
+    private String password;
 
-    @Column(name = "NAMA_USER")
-    private String namaUser;
+    @Column(name = "STAFF_NAME")
+    private String staffName;
 
-    @Column(name = "JABATAN")
-    private String jabatan;
+    @Column(name = "POSITION")
+    private String position;
 
-    @Column(name = "DEFAULT_LOCATION")
-    private String defaultLocation;
+    @Column(name = "ACCESS_LEVEL")
+    private String accessLevel;
 
-    @Column(name = "STATUS_AKTIF")
-    private String statusAktif;
+    @Column(name = "STATUS")
+    private String status;
 
-    @Column(name = "TOKEN")
-    private String token;
-
-    @Column(name = "TOKEN_EXPIRED_AT")
-    private Long tokenExpiredAt;
+    @Column(name = "PHOTO")
+    private String photo;
 
 }

@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class TokenResponse {
 
-    private String token;
+    // temporary kolom token menggunakan photo
+    private String photo;
 
-    private Long expiredAt;
+//    private Long expiredAt;
 }

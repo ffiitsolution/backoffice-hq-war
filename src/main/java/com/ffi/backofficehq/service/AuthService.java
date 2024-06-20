@@ -26,20 +26,20 @@ public class AuthService {
     public TokenResponse login(LoginUserRequest request) {
         validationService.validate(request);
 
-        User user = userRepository.findById(request.getKodeUser()).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.OK, "Username or Password Wrong"));
+        User user = userRepository.findFirstByStaffCode(request.getStaffCode()).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.OK, "Username Not Found"));
 
-        if(request.getKodePassword() == null ? user.getKodePassword() == null : request.getKodePassword().equals(user.getKodePassword())) {
-            user.setToken(UUID.randomUUID().toString());
-            user.setTokenExpiredAt(next30Days());
+        if(request.getPassword()== null ? user.getPassword()== null : request.getPassword().equals(user.getPassword())) {
+            user.setPhoto(UUID.randomUUID().toString());
+//            user.setTokenExpiredAt(next30Days());
             userRepository.save(user);
 
             return TokenResponse.builder()
-                    .token(user.getToken())
-                    .expiredAt(user.getTokenExpiredAt())
+                    .photo(user.getPhoto())
+//                    .expiredAt(user.getTokenExpiredAt())
                     .build();
         } else {
-            throw new ResponseStatusException(HttpStatus.OK, "Username or Password Wrong");
+            throw new ResponseStatusException(HttpStatus.OK, "Password Wrong");
         }
     }
 
@@ -49,9 +49,9 @@ public class AuthService {
 
     @Transactional
     public void logout(User user){
-        user.setToken(null);
-        user.setTokenExpiredAt(null);
-
+        user.setPhoto(null);
+//        user.setTokenExpiredAt(null);
+//
         userRepository.save(user);
     }
 }

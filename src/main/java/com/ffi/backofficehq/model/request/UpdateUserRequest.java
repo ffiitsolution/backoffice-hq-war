@@ -14,9 +14,9 @@ import javax.validation.constraints.Size;
 public class UpdateUserRequest {
 
     @Size(max = 100)
-    private String namaUser;
+    private String staffName;
 
     @Size(max = 100)
-    private String kodePassword;
+    private String password;
 
 }

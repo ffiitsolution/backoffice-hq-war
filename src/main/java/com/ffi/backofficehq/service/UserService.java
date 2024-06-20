@@ -29,25 +29,26 @@ public class UserService {
     public void register(RegisterUserRequest request) {
         validationService.validate(request);
 
-        if (userRepository.existsById(request.getKodeUser())) {
+        if (userRepository.existsById(request.getStaffCode())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already registered");
 
         }
         User user = new User();
-        user.setKodeUser(request.getKodeUser());
-        user.setKodePassword(request.getKodePassword());
-        user.setNamaUser(request.getNamaUser());
+        user.setStaffCode(request.getStaffCode());
+        user.setPassword(request.getPassword());
+        user.setStaffName(request.getStaffName());
 
         userRepository.save(user);
     }
 
     public UserResponse get(User user) {
         return UserResponse.builder()
-                .kodeUser(user.getKodeUser())
-                .namaUser(user.getNamaUser())
-                .jabatan(user.getJabatan())
-                .defaultLocation(user.getDefaultLocation())
-                .statusAktif(user.getStatusAktif()).build();
+                .staffCode(user.getStaffCode())
+                .staffName(user.getStaffName())
+                .position(user.getPosition())
+                .accessLevel(user.getAccessLevel())
+                .photo(user.getPhoto())
+                .status(user.getStatus()).build();
     }
 
     @Transactional
@@ -56,20 +57,20 @@ public class UserService {
 
         log.info("REQUEST : {}", request);
 
-        if (Objects.nonNull(request.getNamaUser())) {
-            user.setNamaUser((request.getNamaUser()));
+        if (Objects.nonNull(request.getStaffName())) {
+            user.setStaffName((request.getStaffName()));
         }
-        if (Objects.nonNull(request.getKodePassword())) {
-            user.setKodePassword(request.getKodePassword());
+        if (Objects.nonNull(request.getPassword())) {
+            user.setPassword(request.getPassword());
         }
 
         userRepository.save(user);
 
-        log.info("USER : {}", user.getNamaUser());
+        log.info("USER : {}", user.getStaffName());
 
         return UserResponse.builder()
-                .namaUser(user.getNamaUser())
-                .kodeUser(user.getKodeUser())
+                .staffName(user.getStaffName())
+                .staffCode(user.getStaffCode())
                 .build();
     }
 }

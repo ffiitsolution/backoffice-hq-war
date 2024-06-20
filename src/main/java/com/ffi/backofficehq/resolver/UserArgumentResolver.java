@@ -39,13 +39,13 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
         }
 
-        User user = userRepository.findFirstByToken(token).orElseThrow(() ->
+        User user = userRepository.findFirstByPhoto(token).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized"));
 
         log.info("USER {}", user);
-        if(user.getTokenExpiredAt() < System.currentTimeMillis()) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
-        }
+//        if(user.getTokenExpiredAt() < System.currentTimeMillis()) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+//        }
 
         return user;
     }

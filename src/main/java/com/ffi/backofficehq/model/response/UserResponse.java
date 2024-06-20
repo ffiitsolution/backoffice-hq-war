@@ -11,15 +11,17 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserResponse {
 
-    private String kodeUser;
+    private String staffCode;
 
-    private String namaUser;
+    private String staffName;
 
-    private String jabatan;
+    private String accessLevel;
 
-    private String defaultLocation;
+    private String position;
 
-    private String statusAktif;
+    private String photo;
+
+    private String status;
 
 
 

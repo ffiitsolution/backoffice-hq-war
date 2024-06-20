@@ -5,13 +5,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ffi.backofficehq.entity.User;
 import com.ffi.backofficehq.model.response.DataTableResponse;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 /**
  *
@@ -20,10 +20,10 @@ import com.ffi.backofficehq.model.response.DataTableResponse;
 @RestController
 public class DataTableController {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
-    public DataTableController(JdbcTemplate jdbcTemplate) {
+    public DataTableController(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -42,7 +42,7 @@ public class DataTableController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "DataTable master supplier", description = "list master supplier")
     public ResponseEntity<DataTableResponse> dtMasterSupplier(User user, @RequestBody Map<String, Object> params) {
-        String query = "SELECT * FROM WMS_SUPPLIER";
+        String query = "SELECT * FROM WMS_SUPPLIER WHERE STATUS = :status";
         DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
         return ResponseEntity.ok(dtResp);
     }

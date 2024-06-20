@@ -2,12 +2,14 @@ package com.ffi.backofficehq.model.response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ffi.backofficehq.util.DynamicRowMapper;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 /**
  *
@@ -32,7 +34,7 @@ public class DataTableResponse {
         this.data = data;
     }
 
-    public DataTableResponse process(String query, Map<String, Object> params, JdbcTemplate jdbcTemplate) {
+    public DataTableResponse process(String query, Map<String, Object> params, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 
         List<Map<String, Object>> columns = (List<Map<String, Object>>) params.get("columns");
 
@@ -43,38 +45,29 @@ public class DataTableResponse {
             });
         }
 
-        // Parse search
-        Map<String, Object> search = (Map<String, Object>) params.get("search");
-        List<String> searchValues = new ArrayList<>();
-        if (search.containsKey("value")) {
-            String searchValue = search.get("value").toString().toLowerCase();
-            String wildcardSearchValue = "%" + searchValue + "%";
-            for (Map<String, Object> column : columns) {
-                searchValues.add(wildcardSearchValue);
-            }
-        }
-
         // Build the WHERE clause for search
+        Map<String, Object> search = (Map<String, Object>) params.get("search");
         StringBuilder whereClause = new StringBuilder();
-        if (!searchValues.isEmpty()) {
-            whereClause.append("(");
+        if (search.containsKey("value") && !search.get("value").toString().isEmpty()) {
+            String searchValue = search.get("value").toString().toLowerCase();
+            params.put("paramSearchFilterDt", "%" + searchValue + "%");
             for (int i = 0; i < columns.size(); i++) {
                 if (i > 0) {
                     whereClause.append(" OR ");
                 }
-                whereClause.append("LOWER(")
+                whereClause.append(" LOWER(")
                         .append(dynamicRowMapper.convertToSnakeCase(columns.get(i).get("data").toString()))
-                        .append(") LIKE ?");
+                        .append(") LIKE :paramSearchFilterDt ");
             }
-            whereClause.append(")");
         }
+        // System.out.println("whereClause: " + whereClause);
 
         // Parse order
         List<Map<String, Object>> order = (List<Map<String, Object>>) params.get("order");
         StringBuilder orderByClause = new StringBuilder();
         for (int i = 0; i < order.size(); i++) {
             int columnIndex = Integer.parseInt(order.get(i).get("column").toString()) - 1; // note: kurangi 1 karena ada kolom numbering
-            if(columnIndex == -1){
+            if (columnIndex == -1) {
                 columnIndex = 0;
             }
             String columnData = dynamicRowMapper.convertToSnakeCase(columns.get(columnIndex).get("data").toString());
@@ -92,7 +85,7 @@ public class DataTableResponse {
         // Build and execute SQL query for the actual data
         StringBuilder dataQuery = new StringBuilder("SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY ");
         dataQuery.append(orderByClause.toString());
-        dataQuery.append(") AS rn, t.* FROM (").append(query);
+        dataQuery.append(") AS rn, t.* FROM ( ").append(query).append(" ) t ");
 
         // Append WHERE clause for search
         if (whereClause.length() > 0) {
@@ -100,18 +93,18 @@ public class DataTableResponse {
         }
 
         // Add pagination
-        dataQuery.append(") t ) WHERE rn > ").append(start).append(" AND rn <= ").append(start + length);
+        dataQuery.append(" ) WHERE rn > ").append(start).append(" AND rn <= ").append(start + length);
 
         // Execute the SQL query and retrieve data
         String queryFinal = dataQuery.toString();
-        System.out.println("queryFinal: " + queryFinal);
-//        System.out.println("searchValues" + Arrays.deepToString(searchValues.toArray()));
-        List<Map<String, Object>> result = jdbcTemplate.query(queryFinal, searchValues.toArray(), new DynamicRowMapper());
+        // System.out.println("queryFinal DT: " + queryFinal);
+
+        List<Map<String, Object>> result = namedParameterJdbcTemplate.query(queryFinal, params, new DynamicRowMapper());
         System.out.println("result: " + result.size());
 
         // Calculate total records and filtered records counts
-        int totalRecords = getTotalRecords(query, jdbcTemplate);
-        int filteredRecords = getFilteredRecords(query, whereClause.toString(), searchValues, jdbcTemplate);
+        int totalRecords = getTotalRecords(query, params, namedParameterJdbcTemplate);
+        int filteredRecords = getFilteredRecords(query, whereClause.toString(), params, namedParameterJdbcTemplate);
 
         // Construct the DataTableResult object
         DataTableResponse dataTableResult = new DataTableResponse();
@@ -123,17 +116,18 @@ public class DataTableResponse {
         return dataTableResult;
     }
 
-    private int getTotalRecords(String query, JdbcTemplate jdbcTemplate) {
+    private int getTotalRecords(String query, Map params, NamedParameterJdbcTemplate jdbcTemplate) {
         String totalRecordsQuery = "SELECT COUNT(*) AS totalRecords FROM (" + query + ")";
-        return jdbcTemplate.queryForObject(totalRecordsQuery, Integer.class);
+        return jdbcTemplate.queryForObject(totalRecordsQuery, params, Integer.class);
     }
 
-    private int getFilteredRecords(String query, String whereClause, List<String> searchValues, JdbcTemplate jdbcTemplate) {
+    private int getFilteredRecords(String query, String whereClause, Map params, NamedParameterJdbcTemplate jdbcTemplate) {
         if (whereClause.isEmpty()) {
-            return getTotalRecords(query, jdbcTemplate);
+            return getTotalRecords(query, params, jdbcTemplate);
         } else {
             String filteredRecordsQuery = "SELECT COUNT(*) AS filteredRecords FROM (" + query + ") WHERE " + whereClause;
-            return jdbcTemplate.queryForObject(filteredRecordsQuery, Integer.class, searchValues.toArray());
+            System.out.println("filteredRecordsQuery: " + filteredRecordsQuery);
+            return jdbcTemplate.queryForObject(filteredRecordsQuery, params, Integer.class);
         }
     }
 

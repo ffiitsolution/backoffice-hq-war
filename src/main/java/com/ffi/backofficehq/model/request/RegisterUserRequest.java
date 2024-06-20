@@ -16,13 +16,13 @@ public class RegisterUserRequest {
 
     @NotBlank
     @Size(max = 100)
-    private String kodeUser;
+    private String staffCode;
 
     @NotBlank
     @Size(max = 100)
-    private String kodePassword;
+    private String password;
 
     @NotBlank
     @Size(max = 100)
-    private String namaUser;
+    private String staffName;
 }

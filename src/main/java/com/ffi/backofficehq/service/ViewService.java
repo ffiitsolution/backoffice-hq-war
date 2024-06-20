@@ -45,7 +45,7 @@ public class ViewService {
 
     public Map<String,Object> getLoginDetail(Map<String,Object> params) {
         List<Map<String,Object>> result = new ArrayList<>();
-        String query = "SELECT KODE_USER, NAMA_USER, JABATAN, DEFAULT_LOCATION,STATUS_AKTIF  FROM WMS_USER WHERE KODE_USER = :kodeUser";
+        String query = "SELECT STAFF_CODE, STAFF_NAME, POSITION, ACCESS_LEVEL, STATUS FROM M_STAFF WHERE STAFF_CODE = :staffCode";
         result = jdbcTemplate.query(query, params, new DynamicRowMapper());
         return result.get(0);
     }

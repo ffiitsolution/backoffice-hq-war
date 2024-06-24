@@ -30,6 +30,9 @@ public class AuthService {
                 new ResponseStatusException(HttpStatus.OK, "Username Not Found"));
 
         if(request.getPassword()== null ? user.getPassword()== null : request.getPassword().equals(user.getPassword())) {
+            if(!user.getStatus().equalsIgnoreCase("A")){
+                throw new ResponseStatusException(HttpStatus.OK, "User is not Active!");
+            }
             user.setPhoto(UUID.randomUUID().toString());
 //            user.setTokenExpiredAt(next30Days());
             userRepository.save(user);

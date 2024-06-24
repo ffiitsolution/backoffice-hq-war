@@ -1,4 +1,4 @@
-package com.ffi.backofficehq.controller;
+package com.ffi.backofficehq.controller.master;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

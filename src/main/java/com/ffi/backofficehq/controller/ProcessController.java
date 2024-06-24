@@ -51,31 +51,6 @@ public class ProcessController {
         return rm;
     }
 
-    @MessageMapping("/send-message") // Endpoint where the client sends messages
-    @SendTo("/topic/outlet") // Topic to which the server sends messages
-    public String handleMessage(String message) {
-        System.out.println("Received message from client: " + message);
-        // Process the message here if needed
-        return "Message received: " + message;
-    }
-
-    // @MessageMapping("/sendMessage")
-    // @SendTo("/topic/receivedMessage")
-    // public String handleMessage(String message) {
-    //     return " Message received: " + message;
-    // }
-    // @MessageMapping("/sendMessage2")
-    // @SendTo("/topic")
-    // public String handleMessageTopic(String message) {
-    //     return " Message received: " + message;
-    // }
-    @MessageMapping("/sendMessage")
-    @SendTo("/topic/{topic}")
-    public String handleMessageOutlet(@Payload String message, @DestinationVariable String topic) {
-        // to do continue //
-        return " Message received: " + message;
-    }
-
     @PostMapping(path = "/api/branch/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Insert branch", description = "Insert master branch")
     public @ResponseBody
@@ -85,7 +60,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.insertBranch(balance);
@@ -111,7 +86,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.updateBranch(balance);
@@ -137,7 +112,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.insertArea(balance);
@@ -163,7 +138,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.updateArea(balance);
@@ -189,7 +164,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.insertCity(balance);
@@ -215,7 +190,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.updateCity(balance);
@@ -241,7 +216,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.insertLocation(balance);
@@ -267,7 +242,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.updateLocation(balance);
@@ -292,7 +267,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.insertUom(balance);
@@ -317,7 +292,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.updateUom(balance);
@@ -342,7 +317,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.insertRsc(balance);
@@ -367,7 +342,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.updateRsc(balance);
@@ -393,7 +368,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.insertRegion(balance);
@@ -419,7 +394,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.updateRegion(balance);
@@ -445,7 +420,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.insertSupplier(balance);
@@ -471,7 +446,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.updateSupplier(balance);
@@ -497,7 +472,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.insertProduct(balance);
@@ -523,7 +498,7 @@ public class ProcessController {
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
 
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = new ArrayList<>();
         ResponseMessage rm = new ResponseMessage();
         try {
             processService.updateProduct(balance);

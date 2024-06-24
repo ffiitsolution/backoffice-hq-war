@@ -1,4 +1,4 @@
-package com.ffi.backofficehq.controller;
+package com.ffi.backofficehq.controller.master;
 
 import java.util.Map;
 

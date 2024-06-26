@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.ffi.backofficehq.controller;
 
 import com.ffi.backofficehq.entity.User;
@@ -17,13 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author USER
- */
+@RestController
 public class DashboardController {
-    
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -31,7 +24,6 @@ public class DashboardController {
     public DashboardController(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    
 
     @PostMapping(path = "/api/dashboard/main-transaction-chart", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Param master menu", description = "List Master Global")
@@ -39,18 +31,19 @@ public class DashboardController {
         WebResponse resp = new WebResponse();
         try {
             String query = """
-                WITH DateRange AS (
-                    SELECT DATE '2024-02-01' AS date_start, DATE '2024-03-01' AS date_end
-                    UNION ALL
-                    SELECT date_start + INTERVAL 1 DAY, date_end
-                    FROM DateRange
-                    WHERE date_start + INTERVAL 1 DAY <= date_end
-                )
-                SELECT dr.date_start AS TRANS_DATE, COALESCE(SUM(tpb.TOTAL_SALES), 0) AS TOTAL_SALES
-                FROM DateRange dr
-                LEFT JOIN T_POS_BILL tpb ON dr.date_start = tpb.TRANS_DATE AND tpb.DELIVERY_STATUS = 'CLS'
-                GROUP BY dr.date_start
-                ORDER BY dr.date_start;
+                SELECT
+                	TRANS_DATE,
+                	SUM(TOTAL_SALES) AS TOTAL_SALES,
+                        COUNT(BILL_NO) AS TOTAL_BILL
+                FROM
+                	T_POS_BILL tpb
+                WHERE
+                	DELIVERY_STATUS = 'CLS'
+                	AND TRANS_DATE BETWEEN TO_DATE(:startDate, 'YYYY-MM-DD') AND TO_DATE(:endDate, 'YYYY-MM-DD')
+                GROUP BY
+                	TRANS_DATE
+                ORDER BY
+                	TRANS_DATE
                            """;
             List<Map<String, Object>> list = jdbcTemplate.query(query, params, new DynamicRowMapper());
             if (!list.isEmpty()) {

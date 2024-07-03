@@ -1,9 +1,7 @@
 package com.ffi.backofficehq.config;
 
-import com.ffi.backofficehq.controller.HqMessageHandler;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;

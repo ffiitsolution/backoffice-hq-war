@@ -1,8 +1,7 @@
-package com.ffi.backofficehq.util;
+package com.ffi.backofficehq.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ffi.backofficehq.model.TableAlias;
-
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
@@ -14,7 +13,6 @@ import java.util.stream.Collectors;
  *
  * @author USER
  */
-
 @Component
 public class TableAliasUtil {
 

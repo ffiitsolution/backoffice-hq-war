@@ -1,5 +1,6 @@
-package com.ffi.backofficehq.entity;
+package com.ffi.backofficehq.auth;
 
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "M_STAFF")
-public class User {
+public class User implements Serializable {
 
     @Id
     @Column(name = "STAFF_CODE")

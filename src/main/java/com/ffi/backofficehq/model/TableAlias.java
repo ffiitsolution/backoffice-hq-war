@@ -8,8 +8,8 @@ import java.util.List;
  *
  * @author USER
  */
-
 public class TableAlias {
+
     @JsonProperty("data")
     private String data;
 

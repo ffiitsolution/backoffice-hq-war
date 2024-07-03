@@ -1,4 +1,4 @@
-package com.ffi.backofficehq.util;
+package com.ffi.backofficehq.utils;
 
 /**
  *

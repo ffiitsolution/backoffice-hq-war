@@ -1,4 +1,4 @@
-package com.ffi.backofficehq.controller;
+package com.ffi.backofficehq;
 
 import com.ffi.paging.ResponseMessage;
 import com.google.gson.Gson;

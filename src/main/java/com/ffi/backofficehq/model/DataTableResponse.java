@@ -1,14 +1,9 @@
-package com.ffi.backofficehq.model.response;
+package com.ffi.backofficehq.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ffi.backofficehq.util.DynamicRowMapper;
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.ffi.backofficehq.utils.DynamicRowMapper;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 /**
@@ -21,7 +16,6 @@ public class DataTableResponse {
     private int recordsTotal;
     private int recordsFiltered;
     private List<Map<String, Object>> data;
-    private final ObjectMapper objectMapper = new ObjectMapper();
     private final DynamicRowMapper dynamicRowMapper = new DynamicRowMapper();
 
     public DataTableResponse() {
@@ -36,16 +30,18 @@ public class DataTableResponse {
 
     public DataTableResponse process(String query, Map<String, Object> params, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 
+        @SuppressWarnings("unchecked")
         List<Map<String, Object>> columns = (List<Map<String, Object>>) params.get("columns");
 
         if (columns != null) {
             columns.removeIf(column -> {
-                Object data = column.get("data");
-                return data != null && (data.equals("dtIndex") || data.equals("dtAction"));
+                Object d = column.get("data");
+                return d != null && (d.equals("dtIndex") || d.equals("dtAction"));
             });
         }
 
         // Build the WHERE clause for search
+        @SuppressWarnings("unchecked")
         Map<String, Object> search = (Map<String, Object>) params.get("search");
         StringBuilder whereClause = new StringBuilder();
         if (search.containsKey("value") && !search.get("value").toString().isEmpty()) {
@@ -63,6 +59,7 @@ public class DataTableResponse {
         // System.out.println("whereClause: " + whereClause);
 
         // Parse order
+        @SuppressWarnings("unchecked")
         List<Map<String, Object>> order = (List<Map<String, Object>>) params.get("order");
         StringBuilder orderByClause = new StringBuilder();
         for (int i = 0; i < order.size(); i++) {
@@ -103,8 +100,8 @@ public class DataTableResponse {
         System.out.println("result: " + result.size());
 
         // Calculate total records and filtered records counts
-        int totalRecords = getTotalRecords(query, params, namedParameterJdbcTemplate);
-        int filteredRecords = getFilteredRecords(query, whereClause.toString(), params, namedParameterJdbcTemplate);
+        Integer totalRecords = getTotalRecords(query, params, namedParameterJdbcTemplate);
+        Integer filteredRecords = getFilteredRecords(query, whereClause.toString(), params, namedParameterJdbcTemplate);
 
         // Construct the DataTableResult object
         DataTableResponse dataTableResult = new DataTableResponse();
@@ -116,12 +113,12 @@ public class DataTableResponse {
         return dataTableResult;
     }
 
-    private int getTotalRecords(String query, Map params, NamedParameterJdbcTemplate jdbcTemplate) {
+    private Integer getTotalRecords(String query, Map<String,Object> params, NamedParameterJdbcTemplate jdbcTemplate) {
         String totalRecordsQuery = "SELECT COUNT(*) AS totalRecords FROM (" + query + ")";
         return jdbcTemplate.queryForObject(totalRecordsQuery, params, Integer.class);
     }
 
-    private int getFilteredRecords(String query, String whereClause, Map params, NamedParameterJdbcTemplate jdbcTemplate) {
+    private Integer getFilteredRecords(String query, String whereClause, Map<String,Object> params, NamedParameterJdbcTemplate jdbcTemplate) {
         if (whereClause.isEmpty()) {
             return getTotalRecords(query, params, jdbcTemplate);
         } else {

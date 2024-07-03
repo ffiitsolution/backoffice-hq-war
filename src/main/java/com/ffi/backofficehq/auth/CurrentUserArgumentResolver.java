@@ -1,4 +1,4 @@
-package com.ffi.backofficehq.resolver;
+package com.ffi.backofficehq.auth;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,19 +10,16 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.ffi.backofficehq.entity.User;
-import com.ffi.backofficehq.repository.UserRepository;
+import com.ffi.backofficehq.services.ViewServices;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Component
 @Slf4j
-public class UserArgumentResolver implements HandlerMethodArgumentResolver {
+public class CurrentUserArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Autowired
-    private UserRepository userRepository;
-
+    private ViewServices viewServices;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -33,19 +30,16 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         HttpServletRequest servletRequest = (HttpServletRequest) webRequest.getNativeRequest();
         String token = servletRequest.getHeader("X-API-TOKEN");
-        log.info("TOKEN {}", token);
+//        log.info("TOKEN {}", token);
 
-        if(token == null) {
+        if (token == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
         }
 
-        User user = userRepository.findFirstByPhoto(token).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized"));
-
-        log.info("USER {}", user);
-//        if(user.getTokenExpiredAt() < System.currentTimeMillis()) {
-//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
-//        }
+        User user = viewServices.userByToken(token);
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Token not found.");
+        }
 
         return user;
     }

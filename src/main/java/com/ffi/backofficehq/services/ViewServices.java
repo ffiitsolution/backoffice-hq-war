@@ -22,6 +22,30 @@ public class ViewServices {
         return dao.userByToken(token);
     }
 
+    
+    
+    // ========================== FILTER from M Joko 7-3-2024 ======================
+    
+    public List<Map<String, Object>> filterTypeOutlet(Map<String, Object> params) {
+        return dao.filterTypeOutlet(params);
+    }
+    
+    public List<Map<String, Object>> filterRegionOutlet(Map<String, Object> params) {
+        return dao.filterRegionOutlet(params);
+    }
+    
+    public List<Map<String, Object>> filterAreaOutlet(Map<String, Object> params) {
+        return dao.filterAreaOutlet(params);
+    }
+    
+    public List<Map<String, Object>> filterCondGlobal(Map<String, Object> params) {
+        return dao.filterCondGlobal(params);
+    }
+    
+    
+    
+    // ========================== END FILTER from M Joko 7-3-2024 ======================
+    
     public List<Map<String, Object>> listTransMainChart(Map<String, Object> params) {
         return dao.listTransMainChart(params);
     }

@@ -13,4 +13,10 @@ public interface ProcessDao {
     // ========================== NEW Method from M Joko 22-5-2024 ======================
     public ApiHqResponse doLogin(Map<String, Object> params);
 //    public Map<String, Object> doLogin(Map<String, Object> params);
+
+    public ApiHqResponse insertMasterGlobal(Map<String, Object> params);
+    public ApiHqResponse updateMasterGlobal(Map<String, Object> params);
+
+    public ApiHqResponse insertOutlet(Map<String, Object> params);
+    public ApiHqResponse updateOutlet(Map<String, Object> params);
 }

@@ -53,4 +53,11 @@ public class ViewServices {
     public List<Map<String, Object>> listMasterDashboardTable(Map<String, Object> params) {
         return dao.listMasterDashboardTable(params);
     }
+
+    // ========================== DETAIL DATA from M Joko 7-4-2024 ==========================
+
+    public List<Map<String, Object>> getDetailOutlet(Map<String, Object> params) {
+        return dao.getDetailOutlet(params);
+    }
+
 }

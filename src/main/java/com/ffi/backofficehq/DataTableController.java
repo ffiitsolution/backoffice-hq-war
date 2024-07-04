@@ -39,7 +39,25 @@ public class DataTableController {
     @PostMapping(path = "/api/outlet/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "DataTable master outlet", description = "List Master Outlet")
     public ResponseEntity<DataTableResponse> dtOutlet(@RequestBody Map<String, Object> params) {
-        String query = "SELECT * FROM M_OUTLET WHERE STATUS LIKE '%' || :status || '%' AND REGION_CODE LIKE '%' || :regionCode || '%' AND TYPE LIKE '%' || :type || '%' AND AREA_CODE LIKE '%' || :areaCode || '%'";
+        String query = "SELECT " +
+                "mo.REGION_CODE, " +
+                "mgo.DESCRIPTION AS REGION_NAME, " +
+                "mo.OUTLET_CODE, " +
+                "mo.AREA_CODE, " +
+                "mga.DESCRIPTION AS AREA_NAME, " +
+                "mo.INITIAL_OUTLET, " +
+                "mo.OUTLET_NAME, " +
+                "mo.TYPE, " +
+                "mgr.DESCRIPTION AS TYPE_STORE, " +
+                "mo.STATUS " +
+                "FROM M_OUTLET mo " +
+                "LEFT JOIN M_GLOBAL mgo ON mgo.COND = 'OUTLET_TP' AND mo.type  = mgo.CODE " +
+                "LEFT JOIN M_GLOBAL mga ON mga.COND = 'AREACODE' AND mo.AREA_CODE = mga.CODE " +
+                "LEFT JOIN M_GLOBAL mgr ON mgr.COND  = 'REG_OUTLET' AND mo.REGION_CODE = mgr.CODE " +
+                "WHERE mo.REGION_CODE LIKE '%' || :regionCode || '%'  " +
+                "AND mo.AREA_CODE LIKE '%' || :areaCode || '%' AND mo.TYPE LIKE '%' || :type || '%' " +
+                "AND mo.STATUS LIKE '%' || :status || '%' " +
+                "ORDER BY mo.REGION_CODE, mo.AREA_CODE, mo.TYPE ASC ";
         DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
         return ResponseEntity.ok(dtResp);
     }

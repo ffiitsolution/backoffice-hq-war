@@ -24,4 +24,23 @@ public class ProcessServices {
     public ApiHqResponse doLogin(Map<String,Object> params) {
         return dao.doLogin(params);
     }
+
+    public ApiHqResponse insertMasterGlobal(Map<String,Object> params) {
+        return dao.insertMasterGlobal(params);
+    }
+
+    public ApiHqResponse updateMasterGlobal(Map<String,Object> params) {
+        return dao.updateMasterGlobal(params);
+    }
+
+    public ApiHqResponse insertOutlet(Map<String,Object> params) {
+      return dao.insertOutlet(params);
+    }
+
+    public ApiHqResponse updateOutlet(Map<String,Object> params) {
+        return dao.updateOutlet(params);
+    }
+
+
+
 }

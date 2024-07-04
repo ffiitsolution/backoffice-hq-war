@@ -4,6 +4,8 @@ import com.ffi.backofficehq.model.ApiHqResponse;
 import com.ffi.backofficehq.dao.ProcessDao;
 import com.ffi.backofficehq.utils.DynamicRowMapper;
 import com.ffi.backofficehq.utils.TableAliasUtil;
+
+import java.sql.PreparedStatement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -91,5 +93,26 @@ public class ProcessDaoImpl implements ProcessDao {
             resp.setMessage("Staff Code not found");
         }
         return resp;
+    }
+
+    @Override
+    public ApiHqResponse insertMasterGlobal(Map<String, Object> params) {
+        return null;
+    }
+
+    @Override
+    public ApiHqResponse updateMasterGlobal(Map<String, Object> params) {
+        return null;
+    }
+
+    @Override
+    public ApiHqResponse insertOutlet(Map<String, Object> params) {
+        var queryString = "INSERT INTO m_outlet VALUES (:staffCode, :outletCode)";
+        return null;
+    }
+
+    @Override
+    public ApiHqResponse updateOutlet(Map<String, Object> params) {
+        return null;
     }
 }

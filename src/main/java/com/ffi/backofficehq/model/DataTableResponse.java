@@ -97,7 +97,6 @@ public class DataTableResponse {
         // System.out.println("queryFinal DT: " + queryFinal);
 
         List<Map<String, Object>> result = namedParameterJdbcTemplate.query(queryFinal, params, new DynamicRowMapper());
-        System.out.println("result: " + result.size());
 
         // Calculate total records and filtered records counts
         Integer totalRecords = getTotalRecords(query, params, namedParameterJdbcTemplate);

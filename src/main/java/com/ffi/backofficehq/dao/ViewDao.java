@@ -28,4 +28,7 @@ public interface ViewDao {
     public List<Map<String, Object>> listTransMainChart(Map<String, Object> params);
 
     public List<Map<String, Object>> listMasterDashboardTable(Map<String, Object> params);
+
+    public List<Map<String, Object>> getDetailOutlet(Map<String, Object> params);
+
 }

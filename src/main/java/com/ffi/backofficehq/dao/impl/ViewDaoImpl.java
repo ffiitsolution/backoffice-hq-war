@@ -6,6 +6,7 @@ import com.ffi.backofficehq.utils.DynamicRowMapper;
 import com.ffi.backofficehq.utils.TableAliasUtil;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
@@ -86,6 +87,21 @@ public class ViewDaoImpl implements ViewDao {
             JOIN M_OUTLET b ON b.outlet_code = a.outlet_code
                      """;
         return jdbcTemplate.query(qry, params, new DynamicRowMapper());
+    }
+
+    @Override
+    public List<Map<String, Object>> getDetailOutlet(Map<String, Object> params) {
+        var query = "SELECT " +
+        "mo.AREA_CODE,mo.REGION_CODE,mo.OUTLET_CODE,mo.ADDRESS_1 || ' ' || mo.ADDRESS_2 AS ADDRESS, " +
+        "mc.CITY_NAME,mgr.DESCRIPTION AS REGION_NAME,mga.DESCRIPTION AS AREA_NAME,mo.OPEN_TIME, " +
+        "mo.TRANS_DATE,mo.CLOSE_TIME,mo.PHONE,mo.FAX,mo.SEND_DATA,mo.IP_OUTLET, mo.PORT_OUTLET,mo.AREA_CODE, " +
+        "mo.MONDAY,mo.TUESDAY,mo.WEDNESDAY, mo.THURSDAY,mo.FRIDAY,mo.SATURDAY,mo.SUNDAY " +
+        "FROM M_OUTLET mo " +
+        "LEFT JOIN M_CITY mc ON mc.CITY_CODE = mo.CITY " +
+        "LEFT JOIN M_GLOBAL mgr ON mgr.COND = 'REG_OUTLET' AND mo.REGION_CODE = mgr.CODE " +
+        "LEFT JOIN M_GLOBAL mga ON mga.COND = 'AREACODE' AND mo.AREA_CODE = mga.CODE " +
+        "WHERE mo.REGION_CODE LIKE '%' || :regionCode || '%' AND mo.OUTLET_CODE LIKE '%' || :outletCode || '%' AND mo.AREA_CODE LIKE '%' || :areaCode || '%'";
+         return jdbcTemplate.query(query, params, new DynamicRowMapper());
     }
 
     @Override

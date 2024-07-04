@@ -16,11 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -100,6 +96,28 @@ public class IndexController {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
             System.out.println(getDateTimeForLog() + "masterDashboardTable: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @GetMapping(path = "/api/outlet/detail", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "masterOutletDetail")
+    public ResponseEntity<ApiHqResponse> getDetailOutlet(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            List<Map<String, Object>> data = viewServices.getDetailOutlet(params);
+            if (!data.isEmpty()) {
+                resp.setSuccess(Boolean.TRUE);
+                resp.setMessage("OK");
+                resp.setData(data.get(0));
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+                resp.setMessage("No data;");
+            }
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            System.out.println(getDateTimeForLog() + "getDetailOutlet: " + e.getMessage());
         }
         return ResponseEntity.ok(resp);
     }

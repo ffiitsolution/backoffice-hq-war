@@ -137,8 +137,8 @@ public class ProcessDaoImpl implements ProcessDao {
         StringBuilder updateQuery = new StringBuilder("UPDATE M_OUTLET SET ");
         this.appendUpdateParams(updateQuery, params, "outletName");
         this.appendUpdateParams(updateQuery, params, "type");
-        this.appendUpdateParams(updateQuery, params, "address1");
-        this.appendUpdateParams(updateQuery, params, "address2");
+        this.appendUpdateParams(updateQuery, params, "address_1");
+        this.appendUpdateParams(updateQuery, params, "address_2");
         this.appendUpdateParams(updateQuery, params, "city");
         this.appendUpdateParams(updateQuery, params, "postCode");
         this.appendUpdateParams(updateQuery, params, "phone");

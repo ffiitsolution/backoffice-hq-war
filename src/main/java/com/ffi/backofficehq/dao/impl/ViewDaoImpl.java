@@ -105,6 +105,13 @@ public class ViewDaoImpl implements ViewDao {
     }
 
     @Override
+    public List<Map<String, Object>> getDetailGlobal(Map<String, Object> params) {
+        var query = "SELECT COND, CODE, DESCRIPTION ,VALUE, STATUS FROM M_GLOBAL mg " +
+        "WHERE COND LIKE NVL(:cond, '%') AND CODE LIKE NVL(:code, '%')";
+        return jdbcTemplate.query(query, params, new DynamicRowMapper());
+    }
+
+    @Override
     public List<Map<String, Object>> filterTypeOutlet(Map<String, Object> params) {
         String qry = "SELECT code, description FROM M_GLOBAL mg WHERE cond = 'OUTLET_TP' AND status = 'A' ORDER BY code";
         return jdbcTemplate.query(qry, params, new DynamicRowMapper());

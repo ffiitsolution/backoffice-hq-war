@@ -1,8 +1,7 @@
 package com.ffi.backofficehq.dao;
 
 import com.ffi.backofficehq.model.ApiHqResponse;
-import com.google.gson.JsonObject;
-import java.util.List;
+
 import java.util.Map;
 
 /**
@@ -14,9 +13,9 @@ public interface ProcessDao {
     public ApiHqResponse doLogin(Map<String, Object> params);
 //    public Map<String, Object> doLogin(Map<String, Object> params);
 
-    public ApiHqResponse insertMasterGlobal(Map<String, Object> params);
-    public ApiHqResponse updateMasterGlobal(Map<String, Object> params);
+    public Integer insertMasterGlobal(Map<String, String> params);
+    public Integer updateMasterGlobal(Map<String, String> params);
 
-    public ApiHqResponse insertOutlet(Map<String, Object> params);
-    public ApiHqResponse updateOutlet(Map<String, Object> params);
+    public Integer insertOutlet(Map<String, String> params);
+    public Integer updateOutlet(Map<String, String> params);
 }

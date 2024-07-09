@@ -60,4 +60,8 @@ public class ViewServices {
         return dao.getDetailOutlet(params);
     }
 
+    public List<Map<String, Object>> getDetailGlobal(Map<String, Object> params) {
+        return dao.getDetailGlobal(params);
+    }
+
 }

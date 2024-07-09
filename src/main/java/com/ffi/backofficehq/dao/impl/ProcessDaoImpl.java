@@ -5,7 +5,6 @@ import com.ffi.backofficehq.dao.ProcessDao;
 import com.ffi.backofficehq.utils.DynamicRowMapper;
 import com.ffi.backofficehq.utils.TableAliasUtil;
 
-import java.sql.PreparedStatement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -29,7 +28,7 @@ public class ProcessDaoImpl implements ProcessDao {
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate jdbcTemplateTrans;
 
-    DateTimeFormatter secondFormatter = DateTimeFormatter.ofPattern("HHmmss");
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmmss");
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     DateTimeFormatter dateTimeOracleFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
     DateFormat dfDate = new SimpleDateFormat("dd-MMM-yyyy");
@@ -96,23 +95,117 @@ public class ProcessDaoImpl implements ProcessDao {
     }
 
     @Override
-    public ApiHqResponse insertMasterGlobal(Map<String, Object> params) {
-        return null;
+    public Integer insertMasterGlobal(Map<String, String> params) {
+        var insertQuery = "INSERT INTO M_GLOBAL (COND, CODE, DESCRIPTION, VALUE, STATUS, USER_UPD, DATE_UPD, TIME_UPD) " +
+                "VALUES (:cond, :code, :description, :value, :status, :userUpd, :dateUpd, :timeUpd)";
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(insertQuery, params);
     }
 
     @Override
-    public ApiHqResponse updateMasterGlobal(Map<String, Object> params) {
-        return null;
+    public Integer updateMasterGlobal(Map<String, String> params) {
+        StringBuilder updateQuery = new StringBuilder("UPDATE M_GLOBAL SET ");
+        this.appendUpdateParams(updateQuery, params, "cond");
+        this.appendUpdateParams(updateQuery, params, "description");
+        this.appendUpdateParams(updateQuery, params, "value");
+        this.appendUpdateParams(updateQuery, params, "status");
+        this.appendUpdateParams(updateQuery, params, "userUpd");
+
+        this.appendUpdateTime(updateQuery, params);
+        updateQuery.append(" WHERE CODE = :code");
+        return jdbcTemplate.update(String.valueOf(updateQuery), params);
     }
 
     @Override
-    public ApiHqResponse insertOutlet(Map<String, Object> params) {
-        var queryString = "INSERT INTO m_outlet VALUES (:staffCode, :outletCode)";
-        return null;
+    public Integer insertOutlet(Map<String, String> params) {
+        var insertQuery = "INSERT INTO M_OUTLET (REGION_CODE,OUTLET_CODE,OUTLET_NAME,TYPE,ADDRESS_1,ADDRESS_2,CITY,POST_CODE,PHONE,FAX,CASH_BALANCE,TRANS_DATE,DEL_LIMIT,DEL_CHARGE," +
+                "RND_PRINT,RND_FACT,RND_LIMIT,TAX,DP_MIN,CANCEL_FEE,CAT_ITEMS,MAX_BILLS,MIN_ITEMS,REF_TIME,TIME_OUT,MAX_SHIFT,SEND_DATA,MIN_PULL_TRX,MAX_PULL_VALUE," +
+                "STATUS,START_DATE,FINISH_DATE,MAX_DISC_PERCENT,MAX_DISC_AMOUNT,OPEN_TIME,CLOSE_TIME,REFUND_TIME_LIMIT,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY,HOLIDAY," +
+                "OUTLET_24_HOUR,IP_OUTLET,PORT_OUTLET,USER_UPD,DATE_UPD,TIME_UPD,FTP_ADDR,FTP_USER,FTP_PASSWORD,INITIAL_OUTLET,AREA_CODE,RSC_CODE,TAX_CHARGE)" +
+                "VALUES (:regionCode,:outletCode,:outletName,:type,:address,:address1,:address2,:city,:postCode,:phone,:fax,:cashBalance,:transDate,:delLimit,:delCharge," +
+                ":rndPrint,:rndFact,:rndLimit,:tax,:dpMin,:cancelFee,:catItem,:maxBills,:minItems,:refTime,:timeOut,:maxShift,:sendData,:minPullTrx,:maxPullValue,:status,:startDate," +
+                ":finishDate,:maxDiscPercent,:maxDiscAmount,:openTime,:closeTime,:refundTimeLimit,:monday,:tuesday,:wednesday,:thursday,:friday,:saturday,:sunday,:holiday," +
+                ":outlet24Hour,:ipOutlet,:portOutlet,:userUpd,:dateUpd,:timeUpd,:ftpAddr,:ftpUser,:ftpPassword,:initialOutlet,:areaCode,:rscCode,:taxCharge";
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(insertQuery, params);
     }
 
     @Override
-    public ApiHqResponse updateOutlet(Map<String, Object> params) {
-        return null;
+    public Integer updateOutlet(Map<String, String> params) {
+        StringBuilder updateQuery = new StringBuilder("UPDATE M_OUTLET SET ");
+        this.appendUpdateParams(updateQuery, params, "outletName");
+        this.appendUpdateParams(updateQuery, params, "type");
+        this.appendUpdateParams(updateQuery, params, "address1");
+        this.appendUpdateParams(updateQuery, params, "address2");
+        this.appendUpdateParams(updateQuery, params, "city");
+        this.appendUpdateParams(updateQuery, params, "postCode");
+        this.appendUpdateParams(updateQuery, params, "phone");
+        this.appendUpdateParams(updateQuery, params, "fax");
+        this.appendUpdateParams(updateQuery, params, "cashBalance");
+        this.appendUpdateParams(updateQuery, params, "transDate");
+        this.appendUpdateParams(updateQuery, params, "delLimit");
+        this.appendUpdateParams(updateQuery, params, "delCharge");
+        this.appendUpdateParams(updateQuery, params, "rndPrint");
+        this.appendUpdateParams(updateQuery, params, "rndFact");
+        this.appendUpdateParams(updateQuery, params, "rndLimit");
+        this.appendUpdateParams(updateQuery, params, "tax");
+        this.appendUpdateParams(updateQuery, params, "dpMin");
+        this.appendUpdateParams(updateQuery, params, "cancelFee");
+        this.appendUpdateParams(updateQuery, params, "catItems");
+        this.appendUpdateParams(updateQuery, params, "maxBills");
+        this.appendUpdateParams(updateQuery, params, "minItems");
+        this.appendUpdateParams(updateQuery, params, "refTime");
+        this.appendUpdateParams(updateQuery, params, "timeOut");
+        this.appendUpdateParams(updateQuery, params, "maxShift");
+        this.appendUpdateParams(updateQuery, params, "sendData");
+        this.appendUpdateParams(updateQuery, params, "minPullTrx");
+        this.appendUpdateParams(updateQuery, params, "maxPullValue");
+        this.appendUpdateParams(updateQuery, params, "status");
+        this.appendUpdateParams(updateQuery, params, "startDate");
+        this.appendUpdateParams(updateQuery, params, "finishDate");
+        this.appendUpdateParams(updateQuery, params, "maxDiscPercent");
+        this.appendUpdateParams(updateQuery, params, "maxDiscAmount");
+        this.appendUpdateParams(updateQuery, params, "openTime");
+        this.appendUpdateParams(updateQuery, params, "closeTime");
+        this.appendUpdateParams(updateQuery, params, "refundTimeLimit");
+        this.appendUpdateParams(updateQuery, params, "monday");
+        this.appendUpdateParams(updateQuery, params, "tuesday");
+        this.appendUpdateParams(updateQuery, params, "wednesday");
+        this.appendUpdateParams(updateQuery, params, "thursday");
+        this.appendUpdateParams(updateQuery, params, "friday");
+        this.appendUpdateParams(updateQuery, params, "saturday");
+        this.appendUpdateParams(updateQuery, params, "sunday");
+        this.appendUpdateParams(updateQuery, params, "holiday");
+        this.appendUpdateParams(updateQuery, params, "outlet24Hour");
+        this.appendUpdateParams(updateQuery, params, "ipOutlet");
+        this.appendUpdateParams(updateQuery, params, "portOutlet");
+        this.appendUpdateParams(updateQuery, params, "userUpd");
+        this.appendUpdateParams(updateQuery, params, "ftpAddr");
+        this.appendUpdateParams(updateQuery, params, "ftpUser");
+        this.appendUpdateParams(updateQuery, params, "ftpPassword");
+        this.appendUpdateParams(updateQuery, params, "initialOutlet");
+        this.appendUpdateParams(updateQuery, params, "areaCode");
+        this.appendUpdateParams(updateQuery, params, "rscCode");
+        this.appendUpdateParams(updateQuery, params, "taxCharge");
+
+        this.appendUpdateTime(updateQuery,params);
+        updateQuery.append(" WHERE REGION_CODE = :regionCode AND OUTLET_CODE = :outletCode");
+        return jdbcTemplate.update(String.valueOf(updateQuery), params);
+    }
+
+    public void appendUpdateParams(StringBuilder sbl, Map<String, String> params, String keyParam) {
+        if (params.containsKey(keyParam)) {
+            sbl.append(new DynamicRowMapper().convertToSnakeCase(keyParam)).append(" = :").append(keyParam).append(", ");
+        }
+    }
+
+    public void appendUpdateTime(StringBuilder sbl, Map<String, String> params) {
+        sbl.append("DATE_UPD").append(" = :").append("dateUpd").append(", ");
+        sbl.append("TIME_UPD").append(" = :").append("timeUpd");
+
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
     }
 }

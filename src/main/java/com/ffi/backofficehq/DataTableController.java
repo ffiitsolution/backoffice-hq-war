@@ -31,7 +31,8 @@ public class DataTableController {
     @PostMapping(path = "/api/global/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "DataTable master global", description = "List Master Global")
     public ResponseEntity<DataTableResponse> dtMGlobal(@RequestBody Map<String, Object> params) {
-        String query = "SELECT * FROM M_GLOBAL WHERE STATUS LIKE '%' || :status || '%' AND COND LIKE '%' || :cond || '%' ";
+        String query = "SELECT * FROM M_GLOBAL WHERE STATUS LIKE '%' || :status || '%' AND COND LIKE '%' || :cond || '%' " +
+                "ORDER BY STATUS ASC ";
         DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
         return ResponseEntity.ok(dtResp);
     }

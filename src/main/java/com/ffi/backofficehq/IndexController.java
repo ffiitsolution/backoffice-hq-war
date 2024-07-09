@@ -1,6 +1,5 @@
 package com.ffi.backofficehq;
 
-import com.ffi.backofficehq.auth.CurrentUser;
 import com.ffi.backofficehq.auth.User;
 import com.ffi.backofficehq.model.ApiHqResponse;
 import com.ffi.backofficehq.services.ProcessServices;
@@ -100,7 +99,92 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @GetMapping(path = "/api/outlet/detail", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/global/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "masterGlobalInsert")
+    public ResponseEntity<ApiHqResponse> insertGlobalData(User user, @RequestBody Map<String, String> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.insertMasterGlobal(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException dae) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(dae.getMessage());
+            System.out.println(getDateTimeForLog() + "insertGlobalData: " + dae.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/global/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "masterGlobalUpdate")
+    public ResponseEntity<ApiHqResponse> updateGlobalData(User user, @RequestBody Map<String, String> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.updateMasterGlobal(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException dae) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(dae.getMessage());
+            System.out.println(getDateTimeForLog() + "insertGlobalData: " + dae.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @GetMapping(path = "/api/master/global/detail", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "masterOutletDetail")
+    public ResponseEntity<ApiHqResponse> getDetailMasterGlobal(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            List<Map<String, Object>> data = viewServices.getDetailGlobal(params);
+            if (!data.isEmpty()) {
+                resp.setSuccess(Boolean.TRUE);
+                resp.setMessage("OK");
+                resp.setData(data.get(0));
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+                resp.setMessage("No data;");
+            }
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            System.out.println(getDateTimeForLog() + "getDetailMasterGlobal: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/outlet/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "masterOutletInsert")
+    public ResponseEntity<ApiHqResponse> insertOutletData(@RequestBody Map<String, String> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.insertMasterOutlet(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException dae) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(dae.getMessage());
+            System.out.println(getDateTimeForLog() + "getDetailOutlet: " + dae.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @GetMapping(path = "/api/master/outlet/detail", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "masterOutletDetail")
     public ResponseEntity<ApiHqResponse> getDetailOutlet(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -118,6 +202,27 @@ public class IndexController {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
             System.out.println(getDateTimeForLog() + "getDetailOutlet: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/outlet/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "OutletDataUpdate")
+    public ResponseEntity<ApiHqResponse> updateOutletData(User user, @RequestBody Map<String, String> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.updateOutlet(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException dae) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(dae.getMessage());
+            System.out.println(getDateTimeForLog() + "insertGlobalData: " + dae.getMessage());
         }
         return ResponseEntity.ok(resp);
     }

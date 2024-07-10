@@ -140,4 +140,12 @@ public class ViewDaoImpl implements ViewDao {
         return jdbcTemplate.query(qry, params, new DynamicRowMapper());
     }
 
+    @Override
+    public List<Map<String, Object>> filterOutlet(Map<String, Object> params) {
+        String qry = "SELECT mg.code, mg.description, mo.OUTLET_NAME " +
+                "FROM M_GLOBAL mg LEFT JOIN M_OUTLET mo ON mo.OUTLET_CODE = mg.CODE " +
+                "WHERE MG.COND = 'OUTLET' AND mg.STATUS = 'A' ORDER BY CODE";
+        return jdbcTemplate.query(qry, params, new DynamicRowMapper());
+    }
+
 }

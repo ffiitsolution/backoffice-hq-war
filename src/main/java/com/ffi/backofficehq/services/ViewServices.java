@@ -41,6 +41,10 @@ public class ViewServices {
     public List<Map<String, Object>> filterCondGlobal(Map<String, Object> params) {
         return dao.filterCondGlobal(params);
     }
+
+    public List<Map<String, Object>> filterOutlet(Map<String, Object> params) {
+        return dao.filterOutlet(params);
+    }
     
     
     

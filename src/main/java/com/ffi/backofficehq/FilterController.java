@@ -123,4 +123,26 @@ public class FilterController {
         }
         return ResponseEntity.ok(resp);
     }
+
+    @PostMapping(path = "/api/filter/outlet", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "filter outlet")
+    public ResponseEntity<ApiHqResponse> filterOutlet(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            List<Map<String, Object>> list = viewServices.filterOutlet(params);
+            if (!list.isEmpty()) {
+                resp.setSuccess(Boolean.TRUE);
+                resp.setMessage("OK");
+                resp.setData(list);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+                resp.setMessage("No data;");
+            }
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            System.out.println(getDateTimeForLog() + "filterOutlet: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
 }

@@ -43,7 +43,7 @@ public class ViewDaoImpl implements ViewDao {
 
     @Override
     public User userByToken(String token) {
-        String qry = "Select * from m_staff where photo = '" + token + "' AND ROWNUM = 1";
+        String qry = "Select * from m_staff where photo = '" + token + "' AND outlet_code = '0000' AND ROWNUM = 1";
         List<Map<String, Object>> list = jdbcTemplate.query(qry, new HashMap(), new DynamicRowMapper());
         User user = new User();
         if (list != null && !list.isEmpty()) {

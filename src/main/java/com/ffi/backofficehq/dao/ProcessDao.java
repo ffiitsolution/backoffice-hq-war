@@ -18,4 +18,19 @@ public interface ProcessDao {
 
     public Integer insertOutlet(Map<String, String> params);
     public Integer updateOutlet(Map<String, String> params);
+    
+    public Integer mMenuItemAdd(Map<String, Object> params);
+    public Integer mMenuItemUpdate(Map<String, Object> params);
+    
+    public Integer mMenuItemLimitAdd(Map<String, Object> params);
+    public Integer mMenuItemLimitUpdate(Map<String, Object> params);
+    
+    public Integer mMenuItemLimitScheduleAdd(Map<String, Object> params);
+    public Integer mMenuItemLimitScheduleUpdate(Map<String, Object> params);
+    
+    public Integer mMenuSetAdd(Map<String, Object> params);
+    public Integer mMenuSetUpdate(Map<String, Object> params);
+    
+    public Integer mModifierItemAdd(Map<String, Object> params);
+    public Integer mModifierItemUpdate(Map<String, Object> params);
 }

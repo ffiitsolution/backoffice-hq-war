@@ -41,7 +41,7 @@ public class IndexController {
     public @ResponseBody
     Map<String, Object> tes() {
         Map<String, Object> map = new HashMap<>();
-        map.put("output", "welcome to baoffihq");
+        map.put("output", "welcome to boffihq");
         map.put("urlDb", urlDb);
         map.put("versionBe", versionBe);
         return map;
@@ -223,6 +223,216 @@ public class IndexController {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(dae.getMessage());
             System.out.println(getDateTimeForLog() + "insertGlobalData: " + dae.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/menu-item/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "mMenuItemAdd")
+    public ResponseEntity<ApiHqResponse> mMenuItemAdd(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.mMenuItemAdd(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            System.out.println(getDateTimeForLog() + "mMenuItemAdd error: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/menu-item/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "mMenuItemUpdate")
+    public ResponseEntity<ApiHqResponse> mMenuItemUpdate(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.mMenuItemUpdate(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            System.out.println(getDateTimeForLog() + "mMenuItemUpdate error: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/menu-item-limit/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "mMenuItemLimitAdd")
+    public ResponseEntity<ApiHqResponse> mMenuItemLimitAdd(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.mMenuItemLimitAdd(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            System.out.println(getDateTimeForLog() + "mMenuItemLimitAdd error: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/menu-item-limit/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "mMenuItemLimitUpdate")
+    public ResponseEntity<ApiHqResponse> mMenuItemLimitUpdate(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.mMenuItemLimitUpdate(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            System.out.println(getDateTimeForLog() + "mMenuItemLimitUpdate error: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/menu-item-limit-schedule/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "mMenuItemLimitScheduleAdd")
+    public ResponseEntity<ApiHqResponse> mMenuItemLimitScheduleAdd(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.mMenuItemLimitScheduleAdd(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            System.out.println(getDateTimeForLog() + "mMenuItemLimitScheduleAdd error: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/menu-item-limit-schedule/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "mMenuItemLimitScheduleUpdate")
+    public ResponseEntity<ApiHqResponse> mMenuItemLimitScheduleUpdate(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.mMenuItemLimitScheduleUpdate(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            System.out.println(getDateTimeForLog() + "mMenuItemLimitScheduleUpdate error: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/menu-set/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "mMenuSetAdd")
+    public ResponseEntity<ApiHqResponse> mMenuSetAdd(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.mMenuSetAdd(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            System.out.println(getDateTimeForLog() + "mMenuSetAdd error: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/menu-set/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "mMenuSetUpdate")
+    public ResponseEntity<ApiHqResponse> mMenuSetUpdate(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.mMenuSetUpdate(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            System.out.println(getDateTimeForLog() + "mMenuSetUpdate error: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/modifier-item/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "mModifierItemAdd")
+    public ResponseEntity<ApiHqResponse> mModifierItemAdd(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.mModifierItemAdd(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            System.out.println(getDateTimeForLog() + "mModifierItemAdd error: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/modifier-item/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "mModifierItemUpdate")
+    public ResponseEntity<ApiHqResponse> mModifierItemUpdate(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            Integer resultData = processServices.mModifierItemUpdate(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            System.out.println(getDateTimeForLog() + "mModifierItemUpdate error: " + e.getMessage());
         }
         return ResponseEntity.ok(resp);
     }

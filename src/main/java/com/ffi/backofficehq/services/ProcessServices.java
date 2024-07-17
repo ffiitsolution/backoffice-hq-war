@@ -57,12 +57,12 @@ public class ProcessServices {
         return dao.mMenuItemLimitUpdate(params);
     }
 
-    public Integer mMenuItemLimitScheduleAdd(Map<String, Object> params) {
-        return dao.mMenuItemLimitScheduleAdd(params);
+    public Integer mMenuItemScheduleAdd(Map<String, Object> params) {
+        return dao.mMenuItemScheduleAdd(params);
     }
 
-    public Integer mMenuItemLimitScheduleUpdate(Map<String, Object> params) {
-        return dao.mMenuItemLimitScheduleUpdate(params);
+    public Integer mMenuItemScheduleUpdate(Map<String, Object> params) {
+        return dao.mMenuItemScheduleUpdate(params);
     }
 
     public Integer mMenuSetAdd(Map<String, Object> params) {

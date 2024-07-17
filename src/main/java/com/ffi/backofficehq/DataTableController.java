@@ -85,4 +85,100 @@ public class DataTableController {
         DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
         return ResponseEntity.ok(dtResp);
     }
+
+    @PostMapping(path = "/api/menu-item/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMMenuItem", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMMenuItem(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_MENU_ITEM WHERE STATUS LIKE '%' || :status || '%'";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/menu-item-limit/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMMenuItemLimit", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMMenuItemLimit(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_MENU_ITEM_LIMIT WHERE STATUS LIKE '%' || :status || '%'";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/menu-item-schedule/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMMenuItemSchedule", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMMenuItemSchedule(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_MENU_ITEM_SCHEDULE";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/menu-set/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMMenuSet", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMMenuSet(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_MENU_SET WHERE STATUS LIKE '%' || :status || '%'";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/modifier-item/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMModifierItem", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMModifierItem(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_MODIFIER_ITEM WHERE STATUS LIKE '%' || :status || '%'";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/outlet-price/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMOutletPrice", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMOutletPrice(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_OUTLET_PRICE";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/price/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMPrice", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMPrice(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_PRICE";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/modifier-price/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMModifierPrice", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMModifierPrice(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_MODIFIER_PRICE";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/item/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMItem", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMItem(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_ITEM";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/recipe-header/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMRecipeHeade", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMRecipeHeader(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_RECIPE_HEADER WHERE STATUS LIKE '%' || :status || '%'";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/recipe-detail/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMRecipeDetail", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMRecipeDetail(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_RECIPE_DETAIL";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/recipe-product/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMRecipeProduct", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMRecipeProduct(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_RECIPE_PRODUCT";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
 }

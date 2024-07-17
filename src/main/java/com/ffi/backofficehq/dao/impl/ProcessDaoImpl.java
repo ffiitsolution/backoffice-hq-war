@@ -305,7 +305,7 @@ public class ProcessDaoImpl implements ProcessDao {
     }
 
     @Override
-    public Integer mMenuItemLimitScheduleAdd(Map<String, Object> params) {
+    public Integer mMenuItemScheduleAdd(Map<String, Object> params) {
         var query = """
             INSERT INTO M_MENU_ITEM_SCHEDULE
             (REGION_CODE, OUTLET_CODE, MENU_ITEM_CODE, START_DATE, END_DATE, MONDAY, MONDAY_HOUR_START, MONDAY_HOUR_END, TUESDAY, TUESDAY_HOUR_START, TUESDAY_HOUR_END, WEDNESDAY, WEDNESDAY_HOUR_START, WEDNESDAY_HOUR_END, THURSDAY, THURSDAY_HOUR_START, THURSDAY_HOUR_END, FRIDAY, FRIDAY_HOUR_START, FRIDAY_HOUR_END, SATURDAY, SATURDAY_HOUR_START, SATURDAY_HOUR_END, SUNDAY, SUNDAY_HOUR_START, SUNDAY_HOUR_END, HOLIDAY, HOLIDAY_HOUR_START, HOLIDAY_HOUR_END, USER_UPD, DATE_UPD, TIME_UPD)
@@ -321,7 +321,7 @@ public class ProcessDaoImpl implements ProcessDao {
     }
 
     @Override
-    public Integer mMenuItemLimitScheduleUpdate(Map<String, Object> params) {
+    public Integer mMenuItemScheduleUpdate(Map<String, Object> params) {
         var query = """
             UPDATE M_MENU_ITEM_SCHEDULE
             SET 

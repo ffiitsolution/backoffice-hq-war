@@ -316,7 +316,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuItemLimitScheduleAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
-            Integer resultData = processServices.mMenuItemLimitScheduleAdd(params);
+            Integer resultData = processServices.mMenuItemScheduleAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
             } else {
@@ -337,7 +337,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuItemLimitScheduleUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
-            Integer resultData = processServices.mMenuItemLimitScheduleUpdate(params);
+            Integer resultData = processServices.mMenuItemScheduleUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
             } else {

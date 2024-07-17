@@ -25,8 +25,8 @@ public interface ProcessDao {
     public Integer mMenuItemLimitAdd(Map<String, Object> params);
     public Integer mMenuItemLimitUpdate(Map<String, Object> params);
     
-    public Integer mMenuItemLimitScheduleAdd(Map<String, Object> params);
-    public Integer mMenuItemLimitScheduleUpdate(Map<String, Object> params);
+    public Integer mMenuItemScheduleAdd(Map<String, Object> params);
+    public Integer mMenuItemScheduleUpdate(Map<String, Object> params);
     
     public Integer mMenuSetAdd(Map<String, Object> params);
     public Integer mMenuSetUpdate(Map<String, Object> params);

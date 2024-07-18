@@ -81,4 +81,84 @@ public class ProcessServices {
         return dao.mModifierItemUpdate(params);
     }
 
+    public Integer mOutletPriceAdd(Map<String, Object> params) {
+        return dao.mOutletPriceAdd(params);
+    }
+
+    public Integer mOutletPriceUpdate(Map<String, Object> params) {
+        return dao.mOutletPriceUpdate(params);
+    }
+
+    public Integer mPriceAdd(Map<String, Object> params) {
+        return dao.mPriceAdd(params);
+    }
+
+    public Integer mPriceUpdate(Map<String, Object> params) {
+        return dao.mPriceUpdate(params);
+    }
+
+    public Integer mModifierPriceAdd(Map<String, Object> params) {
+        return dao.mModifierPriceAdd(params);
+    }
+
+    public Integer mModifierPriceUpdate(Map<String, Object> params) {
+        return dao.mModifierPriceUpdate(params);
+    }
+
+    public Integer mItemAdd(Map<String, Object> params) {
+        return dao.mItemAdd(params);
+    }
+
+    public Integer mItemUpdate(Map<String, Object> params) {
+        return dao.mItemUpdate(params);
+    }
+
+    public Integer mRecipeHeaderAdd(Map<String, Object> params) {
+        return dao.mRecipeHeaderAdd(params);
+    }
+
+    public Integer mRecipeHeaderUpdate(Map<String, Object> params) {
+        return dao.mRecipeHeaderUpdate(params);
+    }
+
+    public Integer mRecipeDetailAdd(Map<String, Object> params) {
+        return dao.mRecipeDetailAdd(params);
+    }
+
+    public Integer mRecipeDetailUpdate(Map<String, Object> params) {
+        return dao.mRecipeDetailUpdate(params);
+    }
+
+    public Integer mRecipeProductAdd(Map<String, Object> params) {
+        return dao.mRecipeProductAdd(params);
+    }
+
+    public Integer mRecipeProductUpdate(Map<String, Object> params) {
+        return dao.mRecipeProductUpdate(params);
+    }
+
+    public Integer mGroupItemAdd(Map<String, Object> params) {
+        return dao.mGroupItemAdd(params);
+    }
+
+    public Integer mGroupItemUpdate(Map<String, Object> params) {
+        return dao.mGroupItemUpdate(params);
+    }
+
+    public Integer mMenuGroupAdd(Map<String, Object> params) {
+        return dao.mMenuGroupAdd(params);
+    }
+
+    public Integer mMenuGroupUpdate(Map<String, Object> params) {
+        return dao.mMenuGroupUpdate(params);
+    }
+
+    public Integer mMenuGroupLimitAdd(Map<String, Object> params) {
+        return dao.mMenuGroupLimitAdd(params);
+    }
+
+    public Integer mMenuGroupLimitUpdate(Map<String, Object> params) {
+        return dao.mMenuGroupLimitUpdate(params);
+    }
+
 }

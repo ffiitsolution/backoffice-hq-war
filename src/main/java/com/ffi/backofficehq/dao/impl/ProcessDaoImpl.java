@@ -434,4 +434,352 @@ public class ProcessDaoImpl implements ProcessDao {
         params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
         return jdbcTemplate.update(query, params);
     }
+
+    @Override
+    public Integer mOutletPriceAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_OUTLET_PRICE
+            (OUTLET_CODE, ORDER_TYPE, PRICE_TYPE_CODE, USER_UPD, DATE_UPD, TIME_UPD)
+            VALUES(:outletCode, :orderType, :priceTypeCode, :userUpd, :dateUpd, :timeUpd)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mOutletPriceUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_OUTLET_PRICE
+            SET 
+                PRICE_TYPE_CODE = :priceTypeCode,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd
+            WHERE
+                OUTLET_CODE = :outletCode
+                AND ORDER_TYPE = :orderType
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mPriceAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_PRICE
+            (MENU_ITEM_CODE, PRICE_TYPE_CODE, PRICE, USER_UPD, DATE_UPD, TIME_UPD)
+            VALUES(:menuItemCode, :priceTypeCode, :price, :userUpd, :dateUpd, :timeUpd)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mPriceUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_PRICE
+            SET 
+                PRICE = :price,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd
+            WHERE
+                MENU_ITEM_CODE = :menuItemCode
+                AND PRICE_TYPE_CODE = :priceTypeCode
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mModifierPriceAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_MODIFIER_PRICE
+            (MODIFIER_GROUP_CODE, MODIFIER_ITEM_CODE, PRICE_TYPE_CODE, PRICE, USER_UPD, DATE_UPD, TIME_UPD)
+            VALUES(:modifierGroupCode, :modifierItemCode, :priceTypeCode, :price, :userUpd, :dateUpd, :timeUpd)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mModifierPriceUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_MODIFIER_PRICE
+            SET 
+                PRICE = :price,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd
+            WHERE
+                MODIFIER_GROUP_CODE = :modifierGroupCode
+                AND MODIFIER_ITEM_CODE = :modifierItemCode
+                AND PRICE_TYPE_CODE = :priceTypeCode
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mItemAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_ITEM
+            (ITEM_CODE, CD_BRAND, ITEM_DESCRIPTION, CD_LEVEL_1, CD_LEVEL_2, CD_LEVEL_3, CD_LEVEL_4, AMT_COST, UOM_WAREHOUSE, CONV_WAREHOUSE, UOM_PURCHASE, CONV_STOCK, UOM_STOCK, CD_WAREHOUSE, FLAG_OTHERS, FLAG_MATERIAL, FLAG_HALF_FINISH, FLAG_FINISHED_GOOD, FLAG_OPEN_MARKET, FLAG_TRANSFER_LOC, FLAG_CANVASING, FLAG_STOCK, PLU, CD_SUPPLIER_DEFAULT, MIN_STOCK, MAX_STOCK, QTY_STOCK, CD_MENU_ITEM, CD_ITEM_LEFTOVER, STATUS, USER_UPD, DATE_UPD, TIME_UPD, FLAG_PAKET)
+            VALUES(:itemCode, :cdBrand, :itemDescription, :cdLevel1, :cdLevel2, :cdLevel3, :cdLevel4, :amtCost, :uomWarehouse, :convWarehouse, :uomPurchase, :convStock, :uomStock, :cdWarehouse, :flagOthers, :flagMaterial, :flagHalfFinish, :flagFinishedGood, :flagOpenMarket, :flagTransferLoc, :flagCanvasing, :flagStock, :plu, :cdSupplierDefault, :minStock, :maxStock, :qtyStock, :cdMenuItem, :cdItemLeftover, :status, :userUpd, :dateUpd, :timeUpd, :flagPaket)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mItemUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_ITEM
+            SET 
+                CD_BRAND = :cdBrand,
+                ITEM_DESCRIPTION = :itemDescription,
+                CD_LEVEL_1 = :cdLevel1,
+                CD_LEVEL_2 = :cdLevel2,
+                CD_LEVEL_3 = :cdLevel3,
+                CD_LEVEL_4 = :cdLevel4,
+                AMT_COST = :amtCost,
+                UOM_WAREHOUSE = :uomWarehouse,
+                CONV_WAREHOUSE = :convWarehouse,
+                UOM_PURCHASE = :uomPurchase,
+                CONV_STOCK = :convStock,
+                UOM_STOCK = :uomStock,
+                CD_WAREHOUSE = :cdWarehouse,
+                FLAG_OTHERS = :flagOthers,
+                FLAG_MATERIAL = :flagMaterial,
+                FLAG_HALF_FINISH = :flagHalfFinish,
+                FLAG_FINISHED_GOOD = :flagFinishedGood,
+                FLAG_OPEN_MARKET = :flagOpenMarket,
+                FLAG_TRANSFER_LOC = :flagTransferLoc,
+                FLAG_CANVASING = :flagCanvasing,
+                FLAG_STOCK = :flagStock,
+                PLU = :plu,
+                CD_SUPPLIER_DEFAULT = :cdSupplierDefault,
+                MIN_STOCK = :minStock,
+                MAX_STOCK = :maxStock,
+                QTY_STOCK = :qtyStock,
+                CD_MENU_ITEM = :cdMenuItem,
+                CD_ITEM_LEFTOVER = :cdItemLeftover,
+                STATUS = :status,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd,
+                FLAG_PAKET = :flagPaket
+            WHERE
+                ITEM_CODE = :itemCode
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mRecipeHeaderAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_RECIPE_HEADER
+            (RECIPE_CODE, RECIPE_REMARK, STATUS, USER_UPD, DATE_UPD, TIME_UPD, MPCS_GROUP)
+            VALUES(:recipeCode, :recipeRemark, :status, :userUpd, :dateUpd, :timeUpd, :mpcsGroup)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mRecipeHeaderUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_RECIPE_HEADER
+            SET 
+                RECIPE_REMARK = :recipeRemark,
+                STATUS = :status,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd,
+                MPCS_GROUP = :mpcsGroup
+            WHERE
+                RECIPE_CODE = :recipeCode
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mRecipeDetailAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_RECIPE_DETAIL
+            (RECIPE_CODE, ITEM_CODE, QTY_PURCHASE, UOM_PURCHASE, QTY_STOCK, UOM_STOCK, REMARK, USER_UPD, DATE_UPD, TIME_UPD)
+            VALUES(:recipeCode, :itemCode, :qtyPurchase, :uomPurchase, :qtyStock, :uomStock, :remark, :userUpd, :dateUpd, :timeUpd)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mRecipeDetailUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_RECIPE_DETAIL
+            SET 
+                QTY_PURCHASE = :qtyPurchase,
+                UOM_PURCHASE = :uomPurchase,
+                QTY_STOCK = :qtyStock,
+                UOM_STOCK = :uomStock,
+                REMARK = :remark,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd
+            WHERE
+                RECIPE_CODE = :recipeCode
+                AND ITEM_CODE = :itemCode
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mRecipeProductAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_RECIPE_PRODUCT
+            (RECIPE_CODE, PRODUCT_CODE, QTY_PURCHASE, UOM_PURCHASE, QTY_STOCK, UOM_STOCK, PRODUCT_REMARK, USER_UPD, DATE_UPD, TIME_UPD)
+            VALUES(:recipeCode, :productCode, :qtyPurchase, :uomPurchase, :qtyStock, :uomStock, :productRemark, :userUpd, :dateUpd, :timeUpd)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mRecipeProductUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_RECIPE_PRODUCT
+            SET 
+                QTY_PURCHASE = :qtyPurchase,
+                UOM_PURCHASE = :uomPurchase,
+                QTY_STOCK = :qtyStock,
+                UOM_STOCK = :uomStock,
+                PRODUCT_REMARK = :productRemark,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd
+            WHERE
+                RECIPE_CODE = :recipeCode
+                AND PRODUCT_CODE = :productCode
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mGroupItemAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_GROUP_ITEM
+            (GROUP_ITEM_CODE, ITEM_CODE, ITEM_DESCRIPTION, MULTIPLY, QTY_STOCK, QTY_STOCK_E, QTY_STOCK_T, UOM_STOCK, STATUS, USER_UPD, DATE_UPD, TIME_UPD)
+            VALUES(:groupItemCode, :itemCode, :itemDescription, :multiply, :qtyStock, :qtyStockE, :qtyStockT, :uomStock, :status, :userUpd, :dateUpd, :timeUpd)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mGroupItemUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_GROUP_ITEM
+            SET 
+                ITEM_DESCRIPTION = :itemDescription,
+                MULTIPLY = :multiply,
+                QTY_STOCK = :qtyStock,
+                QTY_STOCK_E = :qtyStockE,
+                QTY_STOCK_T = :qtyStockT,
+                UOM_STOCK = :uomStock,
+                STATUS = :status,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd
+            WHERE
+                GROUP_ITEM_CODE = :groupItemCode
+                AND ITEM_CODE = :itemCode
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mMenuGroupAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_MENU_GROUP
+            (REGION_CODE, OUTLET_CODE, MENU_GROUP_CODE, SEQ, COLOR_CODE, STATUS, USER_UPD, DATE_UPD, TIME_UPD)
+            VALUES(:regionCode, :outletCode, :menuGroupCode, :seq, :colorCode, :status, :userUpd, :dateUpd, :timeUpd)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mMenuGroupUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_MENU_GROUP
+            SET 
+                SEQ = :seq,
+                COLOR_CODE = :colorCode,
+                STATUS = :status,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd
+            WHERE
+                REGION_CODE = :regionCode
+                AND OUTLET_CODE = :outletCode
+                AND MENU_GROUP_CODE = :menuGroupCode;
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mMenuGroupLimitAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_MENU_GROUP_LIMIT
+            (REGION_CODE, OUTLET_CODE, MENU_GROUP_CODE, ORDER_TYPE, USER_UPD, DATE_UPD, TIME_UPD)
+            VALUES(:regionCode, :outletCode, :menuGroupCode, :orderType, :userUpd, :dateUpd, :timeUpd)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mMenuGroupLimitUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_MENU_GROUP_LIMIT
+            SET 
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd
+            WHERE
+                REGION_CODE = :regionCode
+                AND OUTLET_CODE = :outletCode
+                AND MENU_GROUP_CODE = :menuGroupCode
+                AND ORDER_TYPE = :orderType
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
 }

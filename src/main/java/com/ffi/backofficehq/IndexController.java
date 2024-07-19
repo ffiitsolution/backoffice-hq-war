@@ -109,6 +109,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> insertGlobalData(User user, @RequestBody Map<String, String> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.insertMasterGlobal(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -131,6 +132,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> updateGlobalData(User user, @RequestBody Map<String, String> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.updateMasterGlobal(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -153,6 +155,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> getDetailMasterGlobal(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             List<Map<String, Object>> data = viewServices.getDetailGlobal(params);
             if (!data.isEmpty()) {
                 resp.setSuccess(Boolean.TRUE);
@@ -173,9 +176,10 @@ public class IndexController {
 
     @PostMapping(path = "/api/master/outlet/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "masterOutletInsert")
-    public ResponseEntity<ApiHqResponse> insertOutletData(@RequestBody Map<String, String> params) {
+    public ResponseEntity<ApiHqResponse> insertOutletData(User user, @RequestBody Map<String, String> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.insertMasterOutlet(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -198,6 +202,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> getDetailOutlet(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             List<Map<String, Object>> data = viewServices.getDetailOutlet(params);
             if (!data.isEmpty()) {
                 resp.setSuccess(Boolean.TRUE);
@@ -221,6 +226,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> updateOutletData(User user, @RequestBody Map<String, String> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.updateOutlet(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);

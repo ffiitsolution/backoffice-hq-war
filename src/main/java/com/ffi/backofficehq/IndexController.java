@@ -230,7 +230,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/menu-item/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/menu-item/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mMenuItemAdd")
     public ResponseEntity<ApiHqResponse> mMenuItemAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -274,7 +274,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/menu-item-limit/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/menu-item-limit/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mMenuItemLimitAdd")
     public ResponseEntity<ApiHqResponse> mMenuItemLimitAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -318,7 +318,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/menu-item-limit-schedule/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/menu-item-limit-schedule/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mMenuItemLimitScheduleAdd")
     public ResponseEntity<ApiHqResponse> mMenuItemLimitScheduleAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -362,7 +362,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/menu-set/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/menu-set/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mMenuSetAdd")
     public ResponseEntity<ApiHqResponse> mMenuSetAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -406,7 +406,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/modifier-item/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/modifier-item/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mModifierItemAdd")
     public ResponseEntity<ApiHqResponse> mModifierItemAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -450,7 +450,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/outlet-price/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/outlet-price/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mOutletPriceAdd")
     public ResponseEntity<ApiHqResponse> mOutletPriceAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -494,7 +494,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/price/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/price/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mOutletPriceAdd")
     public ResponseEntity<ApiHqResponse> mPriceAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -538,7 +538,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/modifier-price/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/modifier-price/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mModifierPriceAdd")
     public ResponseEntity<ApiHqResponse> mModifierPriceAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -582,7 +582,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/item/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/item/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mItemAdd")
     public ResponseEntity<ApiHqResponse> mItemAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -626,7 +626,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/recipe-header/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/recipe-header/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mRecipeHeaderAdd")
     public ResponseEntity<ApiHqResponse> mRecipeHeaderAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -670,7 +670,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/recipe-detail/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/recipe-detail/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mRecipeDetailAdd")
     public ResponseEntity<ApiHqResponse> mRecipeDetailAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -714,7 +714,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/recipe-product/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/recipe-product/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mRecipeProductAdd")
     public ResponseEntity<ApiHqResponse> mRecipeProductAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -758,7 +758,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/group-item/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/group-item/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mGroupItemAdd")
     public ResponseEntity<ApiHqResponse> mGroupItemAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -802,7 +802,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/menu-group/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/menu-group/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mMenuGroupAdd")
     public ResponseEntity<ApiHqResponse> mMenuGroupAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
@@ -846,7 +846,7 @@ public class IndexController {
         return ResponseEntity.ok(resp);
     }
 
-    @PostMapping(path = "/api/master/menu-group-limit/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/api/master/menu-group-limit/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "mMenuGroupLimitAdd")
     public ResponseEntity<ApiHqResponse> mMenuGroupLimitAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();

@@ -81,4 +81,20 @@ public interface ProcessDao {
     public Integer mMenuGroupLimitAdd(Map<String, Object> params);
 
     public Integer mMenuGroupLimitUpdate(Map<String, Object> params);
+
+    public Integer mMpcsHeaderAdd(Map<String, Object> params);
+
+    public Integer mMpcsHeaderUpdate(Map<String, Object> params);
+
+    public Integer mMpcsDetailAdd(Map<String, Object> params);
+
+    public Integer mMpcsDetailUpdate(Map<String, Object> params);
+
+    public Integer mSupplierAdd(Map<String, Object> params);
+
+    public Integer mSupplierUpdate(Map<String, Object> params);
+
+    public Integer mItemSupplierAdd(Map<String, Object> params);
+
+    public Integer mItemSupplierUpdate(Map<String, Object> params);
 }

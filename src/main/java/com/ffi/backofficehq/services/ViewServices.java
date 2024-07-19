@@ -2,8 +2,12 @@ package com.ffi.backofficehq.services;
 
 import com.ffi.backofficehq.auth.User;
 import com.ffi.backofficehq.dao.ViewDao;
-import java.io.File;
+import java.io.IOException;
+import java.net.JarURLConnection;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -27,15 +31,22 @@ public class ViewServices {
     @Autowired
     ViewDao dao;
 
-    public String getWarFileLastModified() {
+    
+    public String getApplicationFileLastModified() {
         Long lastModified;
         try {
-            File warFile = Paths.get(ViewServices.class.getProtectionDomain().getCodeSource().getLocation().toURI()).toFile();
-            lastModified = warFile.lastModified();
-        } catch (URISyntaxException e) {
-            lastModified = -1l;
+            URL location = ViewServices.class.getProtectionDomain().getCodeSource().getLocation();
+            Path jarPath = Paths.get(location.toURI());
+            if (Files.isDirectory(jarPath)) {
+                Path jarFilePath = jarPath.resolve("backofficehq.jar");
+                lastModified = Files.getLastModifiedTime(jarFilePath).toMillis();
+            } else {
+                lastModified = Files.getLastModifiedTime(jarPath).toMillis();
+            }
+        } catch (IOException | URISyntaxException e) {
+            lastModified = -1L;
         }
-        if (lastModified != -1) {
+        if (lastModified != -1L) {
             LocalDateTime lastModifiedDateTime = LocalDateTime.ofInstant(
                     Instant.ofEpochMilli(lastModified), ZoneId.systemDefault());
             return lastModifiedDateTime.format(formatter);

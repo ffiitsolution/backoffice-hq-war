@@ -97,7 +97,7 @@ public class DataTableController {
     @PostMapping(path = "/api/menu-item-limit/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "dtMMenuItemLimit", description = "DataTable")
     public ResponseEntity<DataTableResponse> dtMMenuItemLimit(@RequestBody Map<String, Object> params) {
-        String query = "SELECT * FROM M_MENU_ITEM_LIMIT WHERE STATUS LIKE '%' || :status || '%'";
+        String query = "SELECT * FROM M_MENU_ITEM_LIMIT";
         DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
         return ResponseEntity.ok(dtResp);
     }
@@ -202,6 +202,38 @@ public class DataTableController {
     @Operation(summary = "dtMMenuGroup", description = "DataTable")
     public ResponseEntity<DataTableResponse> dtMMenuGroupLimit(@RequestBody Map<String, Object> params) {
         String query = "SELECT * FROM M_MENU_GROUP_LIMIT";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/mpcs-header/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMMpcsHeader", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMMpcsHeader(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_MPCS_HEADER WHERE STATUS LIKE '%' || :status || '%'";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/mpcs-detail/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMMpcsDetail", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMMpcsDetail(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_MPCS_DETAIL WHERE STATUS LIKE '%' || :status || '%'";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/supplier/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMSupplier", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMSupplier(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_SUPPLIER WHERE STATUS LIKE '%' || :status || '%'";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/item-supplier/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMItemSupplier", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMItemSupplier(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_ITEM_SUPPLIER WHERE STATUS LIKE '%' || :status || '%' AND  ITEM_CODE LIKE '%' || :itemCode || '%' AND CD_SUPPLIER LIKE '%' || :cdSupplier || '%'";
         DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
         return ResponseEntity.ok(dtResp);
     }

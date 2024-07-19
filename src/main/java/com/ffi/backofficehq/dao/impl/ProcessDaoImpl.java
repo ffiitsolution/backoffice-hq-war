@@ -782,4 +782,145 @@ public class ProcessDaoImpl implements ProcessDao {
         params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
         return jdbcTemplate.update(query, params);
     }
+
+    @Override
+    public Integer mMpcsHeaderAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_MPCS_HEADER
+            (OUTLET_CODE, MPCS_GROUP, DESCRIPTION, FRYER_TYPE, QTY_CONV, STATUS, USER_UPD, DATE_UPD, TIME_UPD)
+            VALUES(:outletCode, :mpcsGroup, :description, :fryerType, :qtyConv, :status, :userUpd, :dateUpd, :timeUpd)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mMpcsHeaderUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_MPCS_HEADER
+            SET 
+                DESCRIPTION = :description,
+                FRYER_TYPE = :fryerType,
+                QTY_CONV = :qtyConv,
+                STATUS = :status,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd
+            WHERE 
+                OUTLET_CODE = :outletCode AND 
+                MPCS_GROUP = :mpcsGroup
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mMpcsDetailAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_MPCS_DETAIL
+            (OUTLET_CODE, FRYER_TYPE, FRYER_TYPE_SEQ, FRYER_TYPE_CNT, FRYER_TYPE_RESET, STATUS, USER_UPD, DATE_UPD, TIME_UPD, FRYER_TYPE_SEQ_CNT)
+            VALUES(:outletCode, :fryerType, :fryerTypeSeq, :fryerTypeCnt, :fryerTypeReset, :status, :userUpd, :dateUpd, :timeUpd, :fryerTypeSeqCnt)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mMpcsDetailUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_MPCS_DETAIL
+            SET 
+                FRYER_TYPE_CNT = :fryerTypeCnt,
+                FRYER_TYPE_RESET = :fryerTypeReset,
+                STATUS = :status,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd,
+                FRYER_TYPE_SEQ_CNT = :fryerTypeSeqCnt
+            WHERE 
+                OUTLET_CODE = :outletCode AND 
+                FRYER_TYPE = :fryerType AND 
+                FRYER_TYPE_SEQ = :fryerTypeSeq
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mSupplierAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_SUPPLIER
+            (CD_SUPPLIER, SUPPLIER_NAME, ADDRESS_1, ADDRESS_2, CITY, ZIP_CODE, PHONE, FAX, HOMEPAGE, CP_NAME, CP_TITLE, CP_PHONE, CP_PHONE_EXT, CP_MOBILE, CP_EMAIL, FLAG_CANVASING, STATUS, USER_UPD, DATE_UPD, TIME_UPD)
+            VALUES(:cdSupplier, :supplierName, :address1, :address2, :city, :zipCode, :phone, :fax, :homepage, :cpName, :cpTitle, :cpPhone, :cpPhoneExt, :cpMobile, :cpEmail, :flagCanvasing, :status, :userUpd, :dateUpd, :timeUpd)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mSupplierUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_SUPPLIER
+            SET 
+                SUPPLIER_NAME = :supplierName,
+                ADDRESS_1 = :address1,
+                ADDRESS_2 = :address2,
+                CITY = :city,
+                ZIP_CODE = :zipCode,
+                PHONE = :phone,
+                FAX = :fax,
+                HOMEPAGE = :homepage,
+                CP_NAME = :cpName,
+                CP_TITLE = :cpTitle,
+                CP_PHONE = :cpPhone,
+                CP_PHONE_EXT = :cpPhoneExt,
+                CP_MOBILE = :cpMobile,
+                CP_EMAIL = :cpEmail,
+                FLAG_CANVASING = :flagCanvasing,
+                STATUS = :status,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd
+            WHERE 
+                CD_SUPPLIER = :cdSupplier
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mItemSupplierAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_ITEM_SUPPLIER
+            (ITEM_CODE, CD_SUPPLIER, STATUS, USER_UPD, DATE_UPD, TIME_UPD)
+            VALUES(:itemCode, :cdSupplier, :status, :userUpd, :dateUpd, :timeUpd)
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mItemSupplierUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_ITEM_SUPPLIER
+            SET 
+                STATUS = :status,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd
+            WHERE 
+                ITEM_CODE = :itemCode AND 
+                CD_SUPPLIER = :cdSupplier
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
 }

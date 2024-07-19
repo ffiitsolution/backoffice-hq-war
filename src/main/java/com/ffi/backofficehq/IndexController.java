@@ -45,7 +45,7 @@ public class IndexController {
         map.put("urlDb", urlDb);
         map.put("versionBe", versionBe);
         map.put("versionFe", viewServices.versionFe);
-        map.put("warLastUpdate", viewServices.getWarFileLastModified());
+        map.put("jarLastUpdate", viewServices.getApplicationFileLastModified());
         return map;
     }
 
@@ -235,6 +235,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuItemAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mMenuItemAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -256,6 +257,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuItemUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mMenuItemUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -277,6 +279,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuItemLimitAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mMenuItemLimitAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -298,6 +301,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuItemLimitUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mMenuItemLimitUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -319,6 +323,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuItemLimitScheduleAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mMenuItemScheduleAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -340,6 +345,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuItemLimitScheduleUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mMenuItemScheduleUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -361,6 +367,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuSetAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mMenuSetAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -382,6 +389,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuSetUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mMenuSetUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -403,6 +411,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mModifierItemAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mModifierItemAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -424,6 +433,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mModifierItemUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mModifierItemUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -445,6 +455,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mOutletPriceAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mOutletPriceAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -466,6 +477,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mOutletPriceUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mOutletPriceUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -487,6 +499,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mPriceAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mPriceAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -508,6 +521,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mPriceUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mPriceUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -529,6 +543,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mModifierPriceAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mModifierPriceAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -550,6 +565,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mModifierPriceUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mModifierPriceUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -571,6 +587,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mItemAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mItemAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -592,6 +609,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mItemUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mItemUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -613,6 +631,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mRecipeHeaderAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mRecipeHeaderAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -634,6 +653,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mRecipeHeaderUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mRecipeHeaderUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -655,6 +675,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mRecipeDetailAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mRecipeDetailAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -676,6 +697,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mRecipeDetailUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mRecipeDetailUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -697,6 +719,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mRecipeProductAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mRecipeProductAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -718,6 +741,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mRecipeProductUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mRecipeProductUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -739,6 +763,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mGroupItemAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mGroupItemAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -760,6 +785,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mGroupItemUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mGroupItemUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -781,6 +807,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuGroupAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mMenuGroupAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -802,6 +829,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuGroupUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mMenuGroupUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -823,6 +851,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuGroupLimitAdd(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mMenuGroupLimitAdd(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);
@@ -844,6 +873,7 @@ public class IndexController {
     public ResponseEntity<ApiHqResponse> mMenuGroupLimitUpdate(User user, @RequestBody Map<String, Object> params) {
         ApiHqResponse resp = new ApiHqResponse();
         try {
+            params.put("userUpd", user.getStaffCode());
             Integer resultData = processServices.mMenuGroupLimitUpdate(params);
             if (resultData > 0) {
                 resp.setSuccess(Boolean.TRUE);

@@ -161,4 +161,36 @@ public class ProcessServices {
         return dao.mMenuGroupLimitUpdate(params);
     }
 
+    public Integer mMpcsHeaderAdd(Map<String, Object> params) {
+        return dao.mMpcsHeaderAdd(params);
+    }
+
+    public Integer mMpcsHeaderUpdate(Map<String, Object> params) {
+        return dao.mMpcsHeaderUpdate(params);
+    }
+
+    public Integer mMpcsDetailAdd(Map<String, Object> params) {
+        return dao.mMpcsDetailAdd(params);
+    }
+
+    public Integer mMpcsDetailUpdate(Map<String, Object> params) {
+        return dao.mMpcsDetailUpdate(params);
+    }
+
+    public Integer mSupplierAdd(Map<String, Object> params) {
+        return dao.mSupplierAdd(params);
+    }
+
+    public Integer mSupplierUpdate(Map<String, Object> params) {
+        return dao.mSupplierUpdate(params);
+    }
+
+    public Integer mItemSupplierAdd(Map<String, Object> params) {
+        return dao.mItemSupplierAdd(params);
+    }
+
+    public Integer mItemSupplierUpdate(Map<String, Object> params) {
+        return dao.mItemSupplierUpdate(params);
+    }
+
 }

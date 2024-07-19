@@ -106,14 +106,13 @@ public class ProcessDaoImpl implements ProcessDao {
     @Override
     public Integer updateMasterGlobal(Map<String, String> params) {
         StringBuilder updateQuery = new StringBuilder("UPDATE M_GLOBAL SET ");
-        this.appendUpdateParams(updateQuery, params, "cond");
         this.appendUpdateParams(updateQuery, params, "description");
         this.appendUpdateParams(updateQuery, params, "value");
         this.appendUpdateParams(updateQuery, params, "status");
         this.appendUpdateParams(updateQuery, params, "userUpd");
 
         this.appendUpdateTime(updateQuery, params);
-        updateQuery.append(" WHERE CODE = :code");
+        updateQuery.append(" WHERE CODE = :code AND COND = :cond");
         return jdbcTemplate.update(String.valueOf(updateQuery), params);
     }
 

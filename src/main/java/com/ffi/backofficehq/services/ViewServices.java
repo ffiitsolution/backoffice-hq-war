@@ -64,6 +64,10 @@ public class ViewServices {
         return dao.filterTypeOutlet(params);
     }
 
+    public List<Map<String, Object>> filterOrderType(Map<String, Object> params) {
+        return dao.filterOrderType(params);
+    }
+
     public List<Map<String, Object>> filterRegionOutlet(Map<String, Object> params) {
         return dao.filterRegionOutlet(params);
     }
@@ -81,6 +85,11 @@ public class ViewServices {
     }
 
     // ========================== END FILTER from M Joko 7-3-2024 ======================
+
+    
+    // ========================== FILTER PAYMENT METHOD LIMIT from Rafi 7-4-2024 ==========================
+
+
     public List<Map<String, Object>> listTransMainChart(Map<String, Object> params) {
         return dao.listTransMainChart(params);
     }
@@ -97,5 +106,4 @@ public class ViewServices {
     public List<Map<String, Object>> getDetailGlobal(Map<String, Object> params) {
         return dao.getDetailGlobal(params);
     }
-
 }

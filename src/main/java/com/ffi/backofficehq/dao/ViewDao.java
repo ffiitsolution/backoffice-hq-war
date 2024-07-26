@@ -16,6 +16,7 @@ public interface ViewDao {
     
     // ========================== FILTER from M Joko 3-7-2024 ======================
     public List<Map<String, Object>> filterTypeOutlet(Map<String, Object> params);
+    public List<Map<String, Object>> filterOrderType(Map<String, Object> params);
     public List<Map<String, Object>> filterRegionOutlet(Map<String, Object> params);
     public List<Map<String, Object>> filterAreaOutlet(Map<String, Object> params);
     public List<Map<String, Object>> filterCondGlobal(Map<String, Object> params);

@@ -118,6 +118,12 @@ public class ViewDaoImpl implements ViewDao {
     }
 
     @Override
+    public List<Map<String, Object>> filterOrderType(Map<String, Object> params) {
+        String qry = "SELECT code, description FROM M_GLOBAL mg WHERE cond = 'ORDER_TYPE' AND status = 'A' ORDER BY code";
+        return jdbcTemplate.query(qry, params, new DynamicRowMapper());
+    }
+
+    @Override
     public List<Map<String, Object>> filterRegionOutlet(Map<String, Object> params) {
         String qry = "SELECT code, description FROM M_GLOBAL mg WHERE cond = 'REG_OUTLET' AND status = 'A' ORDER BY code";
         return jdbcTemplate.query(qry, params, new DynamicRowMapper());
@@ -129,7 +135,7 @@ public class ViewDaoImpl implements ViewDao {
             SELECT g.code, g.description 
             FROM M_GLOBAL g
             LEFT JOIN m_outlet o ON o.AREA_CODE = g.code
-            WHERE g.cond = 'AREACODE' AND g.status = 'A' AND o.REGION_CODE LIKE '%' || :regionCode || '%'
+            WHERE g.cond = 'AREACODE' AND g.status = 'A' AND o.REGION_CODE LIKE '%' || '%'
                      """;
         return jdbcTemplate.query(qry, params, new DynamicRowMapper());
     }

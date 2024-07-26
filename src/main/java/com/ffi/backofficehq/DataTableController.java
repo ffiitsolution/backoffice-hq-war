@@ -70,6 +70,24 @@ public class DataTableController {
         return ResponseEntity.ok(dtResp);
     }
 
+    @PostMapping(path = "/api/payment-method/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "DataTable master payment", description = "List Master payment")
+    public ResponseEntity<DataTableResponse> dtMPaymentMethod(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_PAYMENT_METHOD WHERE STATUS LIKE '%' || :status || '%'";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
+    @PostMapping(path = "/api/payment-method-limit/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "DataTable master payment", description = "List Master payment")
+    public ResponseEntity<DataTableResponse> dtMPaymentMethodLimit(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_PAYMENT_METHOD_LIMIT "
+        + " WHERE ORDER_TYPE LIKE '%' || :orderType || '%' "
+        + " AND REGION_CODE LIKE '%' || :regionCode || '%'  ";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
+
     @PostMapping(path = "/api/recipe/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "DataTable master recipe", description = "List Master Recipe")
     public ResponseEntity<DataTableResponse> dtRecipe(@RequestBody Map<String, Object> params) {

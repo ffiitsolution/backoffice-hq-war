@@ -193,4 +193,12 @@ public class ProcessServices {
         return dao.mItemSupplierUpdate(params);
     }
 
+    public Integer mSyncUpdateAdd(Map<String, Object> params) {
+        return dao.mSyncUpdateAdd(params);
+    }
+
+    public Integer mSyncUpdateUpdate(Map<String, Object> params) {
+        return dao.mSyncUpdateUpdate(params);
+    }
+
 }

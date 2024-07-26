@@ -43,8 +43,8 @@ public class ProcessDaoImpl implements ProcessDao {
         this.jdbcTemplateTrans = jdbcTemplateTrans;
     }
 
-    public String getDateTimeForLog() {
-        return LocalDateTime.now().format(dateTimeFormatter) + " || ";
+    private void printLogOut(String message) {
+        System.out.println(LocalDateTime.now().format(dateTimeFormatter) + " || " + message);
     }
 
     // ========================== NEW Method from M Joko 22-5-2024 ======================
@@ -917,6 +917,40 @@ public class ProcessDaoImpl implements ProcessDao {
             WHERE 
                 ITEM_CODE = :itemCode AND 
                 CD_SUPPLIER = :cdSupplier
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mSyncUpdateAdd(Map<String, Object> params) {
+        var query = """
+            INSERT INTO M_SYNC_UPDATE
+            (SYNC_ID, DESCRIPTION, TOTAL_UPD, REMARK, STATUS, DATE_CRT, USER_CRT, TIME_CRT, DATE_UPD, USER_UPD, TIME_UPD, VERSIONS)
+            VALUES(:syncId, :description, :totalUpd, :remark, :status, :dateCrt, :userCrt, :timeCrt, :dateUpd, :userUpd, :timeUpd, :versions);
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mSyncUpdateUpdate(Map<String, Object> params) {
+        var query = """
+            UPDATE M_SYNC_UPDATE
+            SET DESCRIPTION = :description,
+                TOTAL_UPD = :totalUpd,
+                REMARK = :remark,
+                STATUS = :status,
+                DATE_CRT = :dateCrt,
+                USER_CRT = :userCrt,
+                TIME_CRT = :timeCrt,
+                DATE_UPD = :dateUpd,
+                USER_UPD = :userUpd,
+                TIME_UPD = :timeUpd,
+                VERSIONS = :versions
+            WHERE SYNC_ID = :syncId
                     """;
         params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
         params.put("timeUpd", LocalDateTime.now().format(timeFormatter));

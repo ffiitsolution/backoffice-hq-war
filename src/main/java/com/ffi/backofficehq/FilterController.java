@@ -32,8 +32,8 @@ public class FilterController {
     @Autowired
     ProcessServices processServices;
 
-    public String getDateTimeForLog() {
-        return LocalDateTime.now().format(dateTimeFormatter) + " || ";
+    private void printLogOut(String message) {
+        System.out.println(LocalDateTime.now().format(dateTimeFormatter) + " || " + message);
     }
     
     @PostMapping(path = "/api/filter/outlet-type", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -53,7 +53,7 @@ public class FilterController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "filterOutletType: " + e.getMessage());
+            printLogOut( "filterOutletType: " + e.getMessage());
         }
         return ResponseEntity.ok(resp);
     }
@@ -97,7 +97,7 @@ public class FilterController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "filterOutletRegion: " + e.getMessage());
+            printLogOut( "filterOutletRegion: " + e.getMessage());
         }
         return ResponseEntity.ok(resp);
     }
@@ -119,7 +119,7 @@ public class FilterController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "filterOutletArea: " + e.getMessage());
+            printLogOut( "filterOutletArea: " + e.getMessage());
         }
         return ResponseEntity.ok(resp);
     }
@@ -141,7 +141,7 @@ public class FilterController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "filterGlobalCond: " + e.getMessage());
+            printLogOut( "filterGlobalCond: " + e.getMessage());
         }
         return ResponseEntity.ok(resp);
     }
@@ -163,7 +163,7 @@ public class FilterController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "filterOutlet: " + e.getMessage());
+            printLogOut( "filterOutlet: " + e.getMessage());
         }
         return ResponseEntity.ok(resp);
     }

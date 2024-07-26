@@ -255,4 +255,12 @@ public class DataTableController {
         DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
         return ResponseEntity.ok(dtResp);
     }
+
+    @PostMapping(path = "/api/sync-update/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "dtMSyncUpdate", description = "DataTable")
+    public ResponseEntity<DataTableResponse> dtMSyncUpdate(@RequestBody Map<String, Object> params) {
+        String query = "SELECT * FROM M_SYNC_UPDATE WHERE STATUS LIKE '%' || :status || '%' AND DATE_CRT BETWEEN :startDate AND :endDate";
+        DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
+        return ResponseEntity.ok(dtResp);
+    }
 }

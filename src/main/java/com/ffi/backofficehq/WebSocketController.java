@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class WebSocketController {
 
     private final SimpMessagingTemplate messagingTemplate;
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Autowired
     public WebSocketController(SimpMessagingTemplate messagingTemplate) {
@@ -35,9 +36,13 @@ public class WebSocketController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
+    private void printLogOut(String message) {
+        System.out.println(LocalDateTime.now().format(dateTimeFormatter) + " || " + message);
+    }
+
     @MessageMapping("/**")
     public void handleAnyMessage(@Payload String message, SimpMessageHeaderAccessor headerAccessor) {
-        System.out.println("Received message: " + message);
+        printLogOut("handleAnyMessage: Received message: " + message);
 
         // Inspect all headers to find the destination
         MessageHeaders headers = headerAccessor.getMessageHeaders();
@@ -45,7 +50,7 @@ public class WebSocketController {
         String destination = "";
         if (value != null) {
             destination = (String) value;
-            System.out.println("Destination: " + destination);
+            printLogOut("handleAnyMessage: Destination: " + destination);
         }
         
         messagingTemplate.convertAndSend(destination.replace("/app", "/topic"), "Message received: " + message);
@@ -61,7 +66,7 @@ public class WebSocketController {
             String response = "{ \"serverTime\": \"" + fTime + "\" }";
             messagingTemplate.convertAndSend("/topic/outlets", response);
         } catch (NumberFormatException | MessagingException e) {
-            System.err.println("boffihq || wsTimePer5Second error: " + e.getMessage());
+            printLogOut("wsTimePer5Second error: " + e.getMessage());
         }
     }
 
@@ -72,7 +77,7 @@ public class WebSocketController {
         Gson gsn = new Gson();
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
-        System.out.println("param: " + param);
+        printLogOut("sendMessage: " + param);
 
         String outletCode = balance.get("outletCode");
         String message = balance.get("message");

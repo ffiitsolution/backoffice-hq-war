@@ -97,4 +97,8 @@ public interface ProcessDao {
     public Integer mItemSupplierAdd(Map<String, Object> params);
 
     public Integer mItemSupplierUpdate(Map<String, Object> params);
+
+    public Integer mSyncUpdateAdd(Map<String, Object> params);
+
+    public Integer mSyncUpdateUpdate(Map<String, Object> params);
 }

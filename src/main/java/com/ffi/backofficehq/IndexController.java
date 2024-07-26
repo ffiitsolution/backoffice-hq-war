@@ -49,8 +49,8 @@ public class IndexController {
         return map;
     }
 
-    public String getDateTimeForLog() {
-        return LocalDateTime.now().format(dateTimeFormatter) + " || ";
+    private void printLogOut(String message) {
+        System.out.println(LocalDateTime.now().format(dateTimeFormatter) + " || " + message);
     }
 
     @PostMapping(path = "/api/auth/login",
@@ -75,7 +75,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "transMainChart: " + e.getMessage());
+            printLogOut("transMainChart: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -98,7 +98,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "masterDashboardTable: " + e.getMessage());
+            printLogOut("masterDashboardTable: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -121,7 +121,7 @@ public class IndexController {
         } catch (DataAccessException dae) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(dae.getMessage());
-            System.out.println(getDateTimeForLog() + "insertGlobalData: " + dae.getMessage());
+            printLogOut("insertGlobalData: " + dae.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -144,7 +144,7 @@ public class IndexController {
         } catch (DataAccessException dae) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(dae.getMessage());
-            System.out.println(getDateTimeForLog() + "insertGlobalData: " + dae.getMessage());
+            printLogOut("insertGlobalData: " + dae.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -168,7 +168,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "getDetailMasterGlobal: " + e.getMessage());
+            printLogOut("getDetailMasterGlobal: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -191,7 +191,7 @@ public class IndexController {
         } catch (DataAccessException dae) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(dae.getMessage());
-            System.out.println(getDateTimeForLog() + "getDetailOutlet: " + dae.getMessage());
+            printLogOut("getDetailOutlet: " + dae.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -215,7 +215,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "getDetailOutlet: " + e.getMessage());
+            printLogOut("getDetailOutlet: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -238,7 +238,7 @@ public class IndexController {
         } catch (DataAccessException dae) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(dae.getMessage());
-            System.out.println(getDateTimeForLog() + "insertGlobalData: " + dae.getMessage());
+            printLogOut("insertGlobalData: " + dae.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -261,7 +261,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mMenuItemAdd error: " + e.getMessage());
+            printLogOut("mMenuItemAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -284,7 +284,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mMenuItemUpdate error: " + e.getMessage());
+            printLogOut("mMenuItemUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -307,7 +307,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mMenuItemLimitAdd error: " + e.getMessage());
+            printLogOut("mMenuItemLimitAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -330,7 +330,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mMenuItemLimitUpdate error: " + e.getMessage());
+            printLogOut("mMenuItemLimitUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -353,7 +353,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mMenuItemLimitScheduleAdd error: " + e.getMessage());
+            printLogOut("mMenuItemLimitScheduleAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -376,7 +376,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mMenuItemLimitScheduleUpdate error: " + e.getMessage());
+            printLogOut("mMenuItemLimitScheduleUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -399,7 +399,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mMenuSetAdd error: " + e.getMessage());
+            printLogOut("mMenuSetAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -422,7 +422,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mMenuSetUpdate error: " + e.getMessage());
+            printLogOut("mMenuSetUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -445,7 +445,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mModifierItemAdd error: " + e.getMessage());
+            printLogOut("mModifierItemAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -468,7 +468,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mModifierItemUpdate error: " + e.getMessage());
+            printLogOut("mModifierItemUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -491,7 +491,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mOutletPriceAdd error: " + e.getMessage());
+            printLogOut("mOutletPriceAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -514,7 +514,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mOutletPriceUpdate error: " + e.getMessage());
+            printLogOut("mOutletPriceUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -537,7 +537,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mPriceAdd error: " + e.getMessage());
+            printLogOut("mPriceAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -560,7 +560,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mPriceUpdate error: " + e.getMessage());
+            printLogOut("mPriceUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -583,7 +583,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mModifierPriceAdd error: " + e.getMessage());
+            printLogOut("mModifierPriceAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -606,7 +606,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mModifierPriceUpdate error: " + e.getMessage());
+            printLogOut("mModifierPriceUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -629,7 +629,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mItemAdd error: " + e.getMessage());
+            printLogOut("mItemAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -652,7 +652,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mItemUpdate error: " + e.getMessage());
+            printLogOut("mItemUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -675,7 +675,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mRecipeHeaderAdd error: " + e.getMessage());
+            printLogOut("mRecipeHeaderAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -698,7 +698,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mRecipeHeaderUpdate error: " + e.getMessage());
+            printLogOut("mRecipeHeaderUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -721,7 +721,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mRecipeDetailAdd error: " + e.getMessage());
+            printLogOut("mRecipeDetailAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -744,7 +744,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mRecipeDetailUpdate error: " + e.getMessage());
+            printLogOut("mRecipeDetailUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -767,7 +767,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mRecipeProductAdd error: " + e.getMessage());
+            printLogOut("mRecipeProductAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -790,7 +790,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mRecipeProductUpdate error: " + e.getMessage());
+            printLogOut("mRecipeProductUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -813,7 +813,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mGroupItemAdd error: " + e.getMessage());
+            printLogOut("mGroupItemAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -836,7 +836,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mGroupItemUpdate error: " + e.getMessage());
+            printLogOut("mGroupItemUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -859,7 +859,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mMenuGroupAdd error: " + e.getMessage());
+            printLogOut("mMenuGroupAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -882,7 +882,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mMenuGroupUpdate error: " + e.getMessage());
+            printLogOut("mMenuGroupUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -905,7 +905,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mMenuGroupLimitAdd error: " + e.getMessage());
+            printLogOut("mMenuGroupLimitAdd error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
@@ -928,7 +928,7 @@ public class IndexController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "mMenuGroupLimitUpdate error: " + e.getMessage());
+            printLogOut("mMenuGroupLimitUpdate error: " + e.getMessage());
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);

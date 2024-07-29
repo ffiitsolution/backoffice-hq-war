@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ViewServices {
 
+    public String versionBe = "";
     public String versionFe = "";
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 

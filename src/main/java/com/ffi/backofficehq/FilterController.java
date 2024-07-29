@@ -75,7 +75,7 @@ public class FilterController {
         } catch (DataAccessException e) {
             resp.setSuccess(Boolean.FALSE);
             resp.setMessage(e.getMessage());
-            System.out.println(getDateTimeForLog() + "filterOrderType: " + e.getMessage());
+            printLogOut("filterOrderType: " + e.getMessage());
         }
         return ResponseEntity.ok(resp);
     }

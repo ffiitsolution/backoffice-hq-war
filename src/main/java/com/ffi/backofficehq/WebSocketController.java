@@ -1,5 +1,6 @@
 package com.ffi.backofficehq;
 
+import com.ffi.backofficehq.services.ViewServices;
 import com.ffi.paging.ResponseMessage;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,6 +33,9 @@ public class WebSocketController {
     public WebSocketController(SimpMessagingTemplate messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
     }
+    
+    @Autowired
+    ViewServices viewServices;
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
@@ -52,10 +56,28 @@ public class WebSocketController {
             destination = (String) value;
             printLogOut("handleAnyMessage: Destination: " + destination);
         }
-        
+
         messagingTemplate.convertAndSend(destination.replace("/app", "/topic"), "Message received: " + message);
     }
 
+    @Scheduled(cron = "*/1 * * * * *")
+    public void wsTimePerSecond() {
+        try {
+            String beVersion = viewServices.versionBe;
+            String feVersion = viewServices.versionFe;
+
+            LocalDateTime currentTime = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String fTime = currentTime.format(formatter);
+
+            String response = "{ \"serverTime\": \"" + fTime + "\", \"beVersion\": \"" + beVersion + "\", \"feVersion\": \"" + feVersion + "\" }";
+            messagingTemplate.convertAndSend("/topic/serverTime", response);
+        } catch (NumberFormatException | MessagingException e) {
+            printLogOut("wsTimePerSecond error: " + e.getMessage());
+        }
+    }
+
+    // tiap 5 detik cek outlet yg aktif
     @Scheduled(cron = "*/5 * * * * *")
     public void wsTimePer5Second() {
         try {

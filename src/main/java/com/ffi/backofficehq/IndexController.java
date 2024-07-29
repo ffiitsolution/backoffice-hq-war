@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
@@ -23,11 +24,10 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 public class IndexController {
-
     public String versionBe = "24.06.03a";
 
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
+    
     @Autowired
     ViewServices viewServices;
 
@@ -36,6 +36,11 @@ public class IndexController {
 
     @Value("${spring.datasource.url}")
     private String urlDb;
+    
+    @PostConstruct
+    public void init() {
+        viewServices.versionBe = versionBe;
+    }
 
     @RequestMapping(value = "/halo")
     public @ResponseBody
@@ -43,7 +48,7 @@ public class IndexController {
         Map<String, Object> map = new HashMap<>();
         map.put("output", "welcome to boffihq");
         map.put("urlDb", urlDb);
-        map.put("versionBe", versionBe);
+        map.put("versionBe", viewServices.versionBe);
         map.put("versionFe", viewServices.versionFe);
         map.put("jarLastUpdate", viewServices.getApplicationFileLastModified());
         return map;

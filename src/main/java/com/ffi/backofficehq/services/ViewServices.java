@@ -88,8 +88,15 @@ public class ViewServices {
     // ========================== END FILTER from M Joko 7-3-2024 ======================
 
     
-    // ========================== FILTER PAYMENT METHOD LIMIT from Rafi 7-4-2024 ==========================
+    // ========================== FILTER PAYMENT METHOD & PAYMENT METHOD LIMIT from Rafi 25-7-2024 & 29-7-2024 ==========================
 
+    public List<Map<String, Object>> filterPaymentMethodCode(Map<String, Object> params) {
+        return dao.filterPaymentMethodCode(params);
+    }
+
+    public List<Map<String, Object>> filterPaymentTypeCode(Map<String, Object> params) {
+        return dao.filterPaymentTypeCode(params);
+    }
 
     public List<Map<String, Object>> listTransMainChart(Map<String, Object> params) {
         return dao.listTransMainChart(params);

@@ -73,7 +73,9 @@ public class DataTableController {
     @PostMapping(path = "/api/payment-method/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "DataTable master payment", description = "List Master payment")
     public ResponseEntity<DataTableResponse> dtMPaymentMethod(@RequestBody Map<String, Object> params) {
-        String query = "SELECT * FROM M_PAYMENT_METHOD WHERE STATUS LIKE '%' || :status || '%'";
+        String query = "SELECT * FROM M_PAYMENT_METHOD WHERE STATUS LIKE '%' || :status || '%' "
+        + " AND PAYMENT_METHOD_CODE LIKE '%' || :paymentMethodCode || '%' "
+        + " AND PAYMENT_TYPE_CODE LIKE '%' || :paymentTypeCode || '%' ORDER BY STATUS ";
         DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
         return ResponseEntity.ok(dtResp);
     }
@@ -83,7 +85,8 @@ public class DataTableController {
     public ResponseEntity<DataTableResponse> dtMPaymentMethodLimit(@RequestBody Map<String, Object> params) {
         String query = "SELECT * FROM M_PAYMENT_METHOD_LIMIT "
         + " WHERE ORDER_TYPE LIKE '%' || :orderType || '%' "
-        + " AND REGION_CODE LIKE '%' || :regionCode || '%'  ";
+        + " AND REGION_CODE LIKE '%' || :regionCode || '%'  "
+        + " AND PAYMENT_METHOD_CODE LIKE '%' || :paymentMethodCode || '%' ";
         DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
         return ResponseEntity.ok(dtResp);
     }

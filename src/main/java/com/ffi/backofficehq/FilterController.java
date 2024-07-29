@@ -167,4 +167,48 @@ public class FilterController {
         }
         return ResponseEntity.ok(resp);
     }
+
+    @PostMapping(path = "/api/filter/payment-method-code", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "filter outlet")
+    public ResponseEntity<ApiHqResponse> filterPaymentMethodCode(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            List<Map<String, Object>> list = viewServices.filterPaymentMethodCode(params);
+            if (!list.isEmpty()) {
+                resp.setSuccess(Boolean.TRUE);
+                resp.setMessage("OK");
+                resp.setData(list);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+                resp.setMessage("No data;");
+            }
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            printLogOut("filterPaymentMethodCode: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/filter/payment-type-code", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "filter outlet")
+    public ResponseEntity<ApiHqResponse> filterPaymentTypeCode(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            List<Map<String, Object>> list = viewServices.filterPaymentTypeCode(params);
+            if (!list.isEmpty()) {
+                resp.setSuccess(Boolean.TRUE);
+                resp.setMessage("OK");
+                resp.setData(list);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+                resp.setMessage("No data;");
+            }
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            printLogOut("filterPaymentTypeCode: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
 }

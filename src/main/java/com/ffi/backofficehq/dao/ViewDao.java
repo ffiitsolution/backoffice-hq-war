@@ -21,10 +21,11 @@ public interface ViewDao {
     public List<Map<String, Object>> filterAreaOutlet(Map<String, Object> params);
     public List<Map<String, Object>> filterCondGlobal(Map<String, Object> params);
     public List<Map<String, Object>> filterOutlet(Map<String, Object> params);
-
-    
     // ========================== END FILTER from M Joko 3-7-2024 ======================
     
+    // ========================== FILTER PAYMENT METOD & PAYMENT METHOD LIMIT 25-7-2024 & 29-7-2024 ======================
+    public List<Map<String, Object>> filterPaymentMethodCode(Map<String, Object> params);
+    public List<Map<String, Object>> filterPaymentTypeCode(Map<String, Object> params);
 
     // ========================== NEW Method from M Joko 3-7-2024 ======================
     public List<Map<String, Object>> listTransMainChart(Map<String, Object> params);

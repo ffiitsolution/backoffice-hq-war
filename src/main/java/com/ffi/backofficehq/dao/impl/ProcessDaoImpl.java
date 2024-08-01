@@ -105,15 +105,23 @@ public class ProcessDaoImpl implements ProcessDao {
 
     @Override
     public Integer updateMasterGlobal(Map<String, String> params) {
-        StringBuilder updateQuery = new StringBuilder("UPDATE M_GLOBAL SET ");
-        this.appendUpdateParams(updateQuery, params, "description");
-        this.appendUpdateParams(updateQuery, params, "value");
-        this.appendUpdateParams(updateQuery, params, "status");
-        this.appendUpdateParams(updateQuery, params, "userUpd");
-
-        this.appendUpdateTime(updateQuery, params);
-        updateQuery.append(" WHERE CODE = :code AND COND = :cond");
-        return jdbcTemplate.update(String.valueOf(updateQuery), params);
+        var updateQuery = """
+            UPDATE M_GLOBAL
+            SET COND = :cond,
+                CODE = :code, 
+                DESCRIPTION = :description, 
+                VALUE = :value,
+                STATUS = :status,
+                USER_UPD = :userUpd,
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd
+            WHERE 
+                COND = :oldCond AND
+                CODE = :oldCode
+                """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(updateQuery, params);
     }
 
     @Override
@@ -955,5 +963,34 @@ public class ProcessDaoImpl implements ProcessDao {
         params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
         params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
         return jdbcTemplate.update(query, params);
+    }
+
+    @Override
+    public Integer mPaymentMethodLimitAdd(Map<String, Object> params) {
+        var insertQuery = "INSERT INTO HQ.M_PAYMENT_METHOD_LIMIT (REGION_CODE, OUTLET_CODE, PAYMENT_METHOD_CODE, ORDER_TYPE, USER_UPD, DATE_UPD, TIME_UPD) "
+            + "VALUES(:regionCode, :outletCode, :paymentMethodCode, :orderType, :userUpd, :dateUpd, :timeUpd)";
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(insertQuery, params);
+    }
+
+    @Override
+    public Integer updateMasterPaymentMethodLimit(Map<String, String> params) {
+        var updateQuery = """
+            UPDATE M_PAYMENT_METHOD_LIMIT
+            SET REGION_CODE = :regionCode,
+                PAYMENT_METHOD_CODE = :paymentMethodCode,
+                ORDER_TYPE = :orderType,
+                USER_UPD = :userUpd, 
+                DATE_UPD = :dateUpd,
+                TIME_UPD = :timeUpd
+            WHERE 
+                OUTLET_CODE = :outletCode AND 
+                PAYMENT_METHOD_CODE = :oldPaymentMethodCode AND  
+                ORDER_TYPE = :oldOrderType
+                    """;
+        params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
+        params.put("timeUpd", LocalDateTime.now().format(timeFormatter));
+        return jdbcTemplate.update(updateQuery, params);
     }
 }

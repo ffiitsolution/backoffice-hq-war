@@ -101,4 +101,8 @@ public interface ProcessDao {
     public Integer mSyncUpdateAdd(Map<String, Object> params);
 
     public Integer mSyncUpdateUpdate(Map<String, Object> params);
+
+    public Integer mPaymentMethodLimitAdd(Map<String, Object> params);
+
+    public Integer updateMasterPaymentMethodLimit(Map<String, String> params);
 }

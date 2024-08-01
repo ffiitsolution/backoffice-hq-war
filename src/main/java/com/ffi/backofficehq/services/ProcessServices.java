@@ -201,4 +201,12 @@ public class ProcessServices {
         return dao.mSyncUpdateUpdate(params);
     }
 
+    public Integer mPaymentMethodLimitAdd(Map<String, Object> params) {
+        return dao.mPaymentMethodLimitAdd(params);
+    }
+
+    public Integer updateMasterPaymentMethodLimit(Map<String, String> params) {
+        return dao.updateMasterPaymentMethodLimit(params);
+    }
+
 }

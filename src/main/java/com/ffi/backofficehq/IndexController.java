@@ -938,4 +938,50 @@ public class IndexController {
         }
         return ResponseEntity.ok(resp);
     }
+
+    @PostMapping(path = "/api/master/payment-method-limit/insert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "mPaymentMethodLimitAdd")
+    public ResponseEntity<ApiHqResponse> mPaymentMethodLimitAdd(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            params.put("userUpd", user.getStaffCode());
+            Integer resultData = processServices.mPaymentMethodLimitAdd(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            printLogOut("mPaymentMethodLimitAdd error: " + e.getMessage());
+            ResponseEntity.badRequest().body(resp);
+        }
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/master/payment-method-limit/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "updateMasterPaymentMethodLimit")
+    public ResponseEntity<ApiHqResponse> updateMasterPaymentMethodLimit(User user, @RequestBody Map<String, String> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            params.put("userUpd", user.getStaffCode());
+            Integer resultData = processServices.updateMasterPaymentMethodLimit(params);
+            if (resultData > 0) {
+                resp.setSuccess(Boolean.TRUE);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+            }
+            resp.setMessage("OK");
+            resp.setData(params);
+        } catch (DataAccessException dae) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(dae.getMessage());
+            printLogOut("updateMasterPaymentMethodLimit: " + dae.getMessage());
+            ResponseEntity.badRequest().body(resp);
+        }
+        return ResponseEntity.ok(resp);
+    }
 }

@@ -214,7 +214,9 @@ public class DataTableController {
     @PostMapping(path = "/api/menu-group/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "dtMMenuGroup", description = "DataTable")
     public ResponseEntity<DataTableResponse> dtMMenuGroup(@RequestBody Map<String, Object> params) {
-        String query = "SELECT * FROM M_MENU_GROUP WHERE STATUS LIKE '%' || :status || '%'";
+        String query = "SELECT * FROM M_MENU_GROUP WHERE STATUS LIKE '%' || :status || '%' "
+        + " AND MENU_GROUP_CODE LIKE '%' || :menuGroupCode || '%' "
+        + " AND OUTLET_CODE LIKE '%' || :outletCode || '%' ";
         DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
         return ResponseEntity.ok(dtResp);
     }

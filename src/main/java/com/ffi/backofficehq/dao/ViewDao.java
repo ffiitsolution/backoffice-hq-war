@@ -27,6 +27,9 @@ public interface ViewDao {
     public List<Map<String, Object>> filterPaymentMethodCode(Map<String, Object> params);
     public List<Map<String, Object>> filterPaymentTypeCode(Map<String, Object> params);
 
+    // ========================== FILTER MENU 05-08-2024 ==========================
+    public List<Map<String, Object>> filterMenuGroupCode(Map<String, Object> params);
+    
     // ========================== NEW Method from M Joko 3-7-2024 ======================
     public List<Map<String, Object>> listTransMainChart(Map<String, Object> params);
 

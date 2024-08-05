@@ -106,6 +106,11 @@ public class ViewServices {
         return dao.listMasterDashboardTable(params);
     }
 
+    // FILTER MENU GROUP 
+    public List<Map<String, Object>> filterMenuGroupCode(Map<String, Object> params) {
+        return dao.filterMenuGroupCode(params);
+    }
+
     // ========================== DETAIL DATA from M Joko 7-4-2024 ==========================
     public List<Map<String, Object>> getDetailOutlet(Map<String, Object> params) {
         return dao.getDetailOutlet(params);

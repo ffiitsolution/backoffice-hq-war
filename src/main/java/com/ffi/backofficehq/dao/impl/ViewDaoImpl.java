@@ -155,6 +155,12 @@ public class ViewDaoImpl implements ViewDao {
     }
 
     @Override
+    public List<Map<String, Object>> filterMenuGroupCode(Map<String, Object> params) {
+        String qry = "SELECT CODE, DESCRIPTION FROM M_GLOBAL mg WHERE COND = 'GROUP' AND STATUS = 'A' ORDER BY CODE";
+        return jdbcTemplate.query(qry, params, new DynamicRowMapper());
+    }
+
+    @Override
     public List<Map<String, Object>> filterPaymentMethodCode(Map<String, Object> params) {
         String qry = "SELECT CODE, DESCRIPTION FROM M_GLOBAL mg WHERE COND = 'PAY_METHOD' AND STATUS = 'A' ORDER BY CODE";
         return jdbcTemplate.query(qry, params, new DynamicRowMapper());

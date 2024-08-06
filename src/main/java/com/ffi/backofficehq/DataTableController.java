@@ -224,7 +224,10 @@ public class DataTableController {
     @PostMapping(path = "/api/menu-group-limit/dt", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "dtMMenuGroup", description = "DataTable")
     public ResponseEntity<DataTableResponse> dtMMenuGroupLimit(@RequestBody Map<String, Object> params) {
-        String query = "SELECT * FROM M_MENU_GROUP_LIMIT";
+        String query = "SELECT * FROM M_MENU_GROUP_LIMIT WHERE MENU_GROUP_CODE LIKE '%' || :menuGroupCode || '%' "
+        + " AND ORDER_TYPE LIKE '%' || :orderType || '%' "
+        + " AND OUTLET_CODE LIKE '%' || :outletCode || '%' "
+        + " AND REGION_CODE LIKE '%' || :regionCode || '%' ";
         DataTableResponse dtResp = new DataTableResponse().process(query, params, jdbcTemplate);
         return ResponseEntity.ok(dtResp);
     }

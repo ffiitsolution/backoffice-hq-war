@@ -776,14 +776,16 @@ public class ProcessDaoImpl implements ProcessDao {
         var query = """
             UPDATE M_MENU_GROUP_LIMIT
             SET 
+                MENU_GROUP_CODE = :menuGroupCode,
+                ORDER_TYPE = :orderType,
                 USER_UPD = :userUpd,
                 DATE_UPD = :dateUpd,
                 TIME_UPD = :timeUpd
             WHERE
                 REGION_CODE = :regionCode
                 AND OUTLET_CODE = :outletCode
-                AND MENU_GROUP_CODE = :menuGroupCode
-                AND ORDER_TYPE = :orderType
+                AND MENU_GROUP_CODE = :oldMenuGroupCode
+                AND ORDER_TYPE = :oldOrderType
                     """;
         params.put("dateUpd", LocalDateTime.now().format(dateTimeOracleFormatter));
         params.put("timeUpd", LocalDateTime.now().format(timeFormatter));

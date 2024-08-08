@@ -1,13 +1,13 @@
 package com.ffi.backofficehq;
 
 import com.ffi.backofficehq.services.ViewServices;
-import com.ffi.paging.ResponseMessage;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import io.swagger.v3.oas.annotations.Operation;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -95,7 +95,7 @@ public class WebSocketController {
     @PostMapping(path = "/api/outletMessage", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Send Message", description = "Send Message")
     public @ResponseBody
-    ResponseMessage sendMessage(@RequestBody String param) throws IOException, Exception {
+    Map<String, Object> sendMessage(@RequestBody String param) throws IOException, Exception {
         Gson gsn = new Gson();
         Map<String, String> balance = gsn.fromJson(param, new TypeToken<Map<String, Object>>() {
         }.getType());
@@ -104,8 +104,8 @@ public class WebSocketController {
         String outletCode = balance.get("outletCode");
         String message = balance.get("message");
         simpMessagingTemplate.convertAndSend("/topic/outlets/" + outletCode, message);
-        ResponseMessage rm = new ResponseMessage();
-        rm.setSuccess(true);
+        Map<String, Object> rm = new HashMap();
+        rm.put("success",true);
         return rm;
     }
 }

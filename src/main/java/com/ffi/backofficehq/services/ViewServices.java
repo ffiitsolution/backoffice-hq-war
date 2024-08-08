@@ -119,4 +119,8 @@ public class ViewServices {
     public List<Map<String, Object>> getDetailGlobal(Map<String, Object> params) {
         return dao.getDetailGlobal(params);
     }
+
+    public List<Map<String, Object>> listOutletMonitoring(Map<String, Object> params) {
+        return dao.listOutletMonitoring(params);
+    }
 }

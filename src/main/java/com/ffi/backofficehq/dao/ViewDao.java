@@ -37,4 +37,6 @@ public interface ViewDao {
 
     public List<Map<String, Object>> getDetailOutlet(Map<String, Object> params);
     public List<Map<String, Object>> getDetailGlobal(Map<String, Object> params);
+    
+    public List<Map<String, Object>> listOutletMonitoring(Map<String, Object> params);
 }

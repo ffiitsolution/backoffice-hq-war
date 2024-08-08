@@ -984,4 +984,24 @@ public class IndexController {
         }
         return ResponseEntity.ok(resp);
     }
+
+    @PostMapping(path = "/api/monitoring/outlet-monitoring", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "listOutletMonitoring")
+    public ResponseEntity<ApiHqResponse> listOutletMonitoring(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            List<Map<String, Object>> list = viewServices.listOutletMonitoring(params);
+            if (!list.isEmpty()) {
+                resp.setSuccess(Boolean.TRUE);
+                resp.setMessage("OK");
+                resp.setData(list);
+            }
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            printLogOut("transMainChart: " + e.getMessage());
+            ResponseEntity.badRequest().body(resp);
+        }
+        return ResponseEntity.ok(resp);
+    }
 }

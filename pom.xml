@@ -56,13 +56,13 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>5.0.1</version>
+            <version>6.19.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports-fonts</artifactId>
-            <version>6.16.0</version>
+            <version>6.19.0</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -79,12 +79,6 @@
             <artifactId>gson</artifactId>
             <type>jar</type>
             <version>2.10.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ffi.paging</groupId>
-            <artifactId>paging</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
         </dependency>
     </dependencies>
 
@@ -104,5 +98,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

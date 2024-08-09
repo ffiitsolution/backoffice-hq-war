@@ -33,7 +33,7 @@ public class WebSocketController {
     public WebSocketController(SimpMessagingTemplate messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
     }
-    
+
     @Autowired
     ViewServices viewServices;
 
@@ -46,18 +46,20 @@ public class WebSocketController {
 
     @MessageMapping("/**")
     public void handleAnyMessage(@Payload String message, SimpMessageHeaderAccessor headerAccessor) {
-        printLogOut("handleAnyMessage: Received message: " + message);
+        if (!message.isBlank()) {
+            printLogOut("handleAnyMessage: Received message: " + message);
 
-        // Inspect all headers to find the destination
-        MessageHeaders headers = headerAccessor.getMessageHeaders();
-        Object value = headers.get("simpDestination");
-        String destination = "";
-        if (value != null) {
-            destination = (String) value;
-            printLogOut("handleAnyMessage: Destination: " + destination);
+            // Inspect all headers to find the destination
+            MessageHeaders headers = headerAccessor.getMessageHeaders();
+            Object value = headers.get("simpDestination");
+            String destination = "";
+            if (value != null) {
+                destination = (String) value;
+                printLogOut("handleAnyMessage: Destination: " + destination);
+            }
+
+            messagingTemplate.convertAndSend(destination.replace("/app", "/topic"), "Message received: " + message);
         }
-
-        messagingTemplate.convertAndSend(destination.replace("/app", "/topic"), "Message received: " + message);
     }
 
     @Scheduled(cron = "*/1 * * * * *")
@@ -85,7 +87,7 @@ public class WebSocketController {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String fTime = currentTime.format(formatter);
 
-            String response = "{ \"serverTime\": \"" + fTime + "\" }";
+            String response = "{ \"action\": \"time\", \"serverTime\": \"" + fTime + "\" }";
             messagingTemplate.convertAndSend("/topic/outlets", response);
         } catch (NumberFormatException | MessagingException e) {
             printLogOut("wsTimePer5Second error: " + e.getMessage());
@@ -105,7 +107,7 @@ public class WebSocketController {
         String message = balance.get("message");
         simpMessagingTemplate.convertAndSend("/topic/outlets/" + outletCode, message);
         Map<String, Object> rm = new HashMap();
-        rm.put("success",true);
+        rm.put("success", true);
         return rm;
     }
 }

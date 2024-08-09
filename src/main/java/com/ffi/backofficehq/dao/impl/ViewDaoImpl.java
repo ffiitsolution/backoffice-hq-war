@@ -174,7 +174,13 @@ public class ViewDaoImpl implements ViewDao {
 
     @Override
     public List<Map<String, Object>> listOutletMonitoring(Map<String, Object> params) {
-        String qry = "SELECT REGION_CODE, OUTLET_CODE, OUTLET_NAME, TYPE, CITY, TRANS_DATE, IP_OUTLET, INITIAL_OUTLET, AREA_CODE, RSC_CODE FROM M_OUTLET WHERE STATUS = 'A' AND 'TYPE' NOT IN ('HO', 'REG') ORDER BY REGION_CODE, OUTLET_CODE";
+        String qry = "SELECT REGION_CODE, OUTLET_CODE, OUTLET_NAME, TYPE, CITY, TRANS_DATE, IP_OUTLET, INITIAL_OUTLET, AREA_CODE, RSC_CODE FROM M_OUTLET WHERE STATUS = 'A' AND (\"TYPE\" <> 'HO' AND \"TYPE\" <> 'REG') ORDER BY REGION_CODE, AREA_CODE, OUTLET_CODE";
+        return jdbcTemplate.query(qry, params, new DynamicRowMapper());
+    }
+
+    @Override
+    public List<Map<String, Object>> filterMainVersionApp(Map<String, Object> params) {
+        String qry = "SELECT * FROM M_BOFFI_CONFIG WHERE COND = 'VERSIONAPP'";
         return jdbcTemplate.query(qry, params, new DynamicRowMapper());
     }
 

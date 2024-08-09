@@ -14,9 +14,13 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -24,19 +28,23 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 public class IndexController {
+
     public String versionBe = "24.06.03a";
 
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    
+
     @Autowired
     ViewServices viewServices;
 
     @Autowired
     ProcessServices processServices;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     @Value("${spring.datasource.url}")
     private String urlDb;
-    
+
     @PostConstruct
     public void init() {
         viewServices.versionBe = versionBe;
@@ -1003,5 +1011,34 @@ public class IndexController {
             ResponseEntity.badRequest().body(resp);
         }
         return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping(path = "/api/post-external", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "postExternal")
+    public ResponseEntity<Object> postExternal(@RequestBody Map<String, Object> params) {
+
+        String externalUrl = params.get("url").toString();
+        if (externalUrl == null) {
+            return ResponseEntity.badRequest().body("url needed");
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(params, headers);
+
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(
+                    externalUrl,
+                    HttpMethod.POST,
+                    requestEntity,
+                    String.class
+            );
+            return ResponseEntity
+                    .status(response.getStatusCode())
+                    .headers(response.getHeaders())
+                    .body(response.getBody());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("ERR: " + e.getMessage());
+        }
     }
 }

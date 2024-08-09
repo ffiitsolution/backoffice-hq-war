@@ -233,4 +233,26 @@ public class FilterController {
         }
         return ResponseEntity.ok(resp);
     }
+
+    @PostMapping(path = "/api/filter/main-version-app", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "filter outlet")
+    public ResponseEntity<ApiHqResponse> filterMainVersionApp(User user, @RequestBody Map<String, Object> params) {
+        ApiHqResponse resp = new ApiHqResponse();
+        try {
+            List<Map<String, Object>> list = viewServices.filterMainVersionApp(params);
+            if (!list.isEmpty()) {
+                resp.setSuccess(Boolean.TRUE);
+                resp.setMessage("OK");
+                resp.setData(list);
+            } else {
+                resp.setSuccess(Boolean.FALSE);
+                resp.setMessage("No data;");
+            }
+        } catch (DataAccessException e) {
+            resp.setSuccess(Boolean.FALSE);
+            resp.setMessage(e.getMessage());
+            printLogOut("filterMainVersionApp: " + e.getMessage());
+        }
+        return ResponseEntity.ok(resp);
+    }
 }

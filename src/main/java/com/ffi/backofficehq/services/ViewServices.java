@@ -123,4 +123,8 @@ public class ViewServices {
     public List<Map<String, Object>> listOutletMonitoring(Map<String, Object> params) {
         return dao.listOutletMonitoring(params);
     }
+
+    public List<Map<String, Object>> filterMainVersionApp(Map<String, Object> params) {
+        return dao.filterMainVersionApp(params);
+    }
 }

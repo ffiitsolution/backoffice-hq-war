@@ -58,7 +58,7 @@ public class WebSocketController {
                 printLogOut("handleAnyMessage: Destination: " + destination);
             }
 
-            messagingTemplate.convertAndSend(destination.replace("/app", "/topic"), "Message received: " + message);
+            messagingTemplate.convertAndSend(destination.replace("/app", "/topic"), message);
         }
     }
 
